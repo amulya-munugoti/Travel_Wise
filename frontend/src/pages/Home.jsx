@@ -1,336 +1,158 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { 
-  Compass, 
-  Sparkles, 
-  MapPin, 
-  Clock, 
-  Calendar, 
-  CheckCircle2, 
-  ArrowRight, 
-  ShieldCheck, 
-  DollarSign, 
-  Layers, 
-  Luggage, 
-  Navigation2,
-  TrendingUp,
-  HeartHandshake
-} from 'lucide-react';
-import { formatCurrency } from '../utils/formatters';
-import PlaceImage from '../components/trip/PlaceImage';
+import { Link } from 'react-router-dom';
+import { ArrowRight, CalendarDays, Compass, MapPin, Sparkles } from 'lucide-react';
 
-export const Home = () => {
-  const navigate = useNavigate();
+const destinations = [
+  { city: 'Hyderabad', state: 'Telangana', detail: 'Historic landmarks and local food', style: 'from-amber-100 to-orange-50' },
+  { city: 'Goa', state: 'Goa', detail: 'Coastal views and laid-back days', style: 'from-sky-100 to-cyan-50' },
+  { city: 'Jaipur', state: 'Rajasthan', detail: 'Fortresses, palaces and markets', style: 'from-rose-100 to-orange-50' },
+  { city: 'Bengaluru', state: 'Karnataka', detail: 'Green spaces and city culture', style: 'from-emerald-100 to-lime-50' },
+  { city: 'Munnar', state: 'Kerala', detail: 'Tea country and mountain air', style: 'from-teal-100 to-emerald-50' },
+  { city: 'Agra', state: 'Uttar Pradesh', detail: 'Mughal history and architecture', style: 'from-violet-100 to-fuchsia-50' },
+];
 
-  const featuredDestinations = [
-    {
-      city: 'Hyderabad',
-      state: 'Telangana',
-      tagline: 'City of Pearls, Charminar & Royal Biryani',
-      placesCount: '12+ Spots',
-      avgBudget: '₹4,500 for 2 Days',
-    },
-    {
-      city: 'Goa',
-      state: 'Goa',
-      tagline: 'Sun-drenched beaches, forts & coastal dining',
-      placesCount: '15+ Spots',
-      avgBudget: '₹7,500 for 3 Days',
-    },
-    {
-      city: 'Jaipur',
-      state: 'Rajasthan',
-      tagline: 'Pink City palaces, amber forts & vibrant bazaars',
-      placesCount: '10+ Spots',
-      avgBudget: '₹5,000 for 2 Days',
-    },
-    {
-      city: 'Bengaluru',
-      state: 'Karnataka',
-      tagline: 'Garden City parks, craft breweries & palaces',
-      placesCount: '8+ Spots',
-      avgBudget: '₹4,000 for 2 Days',
-    },
-    {
-      city: 'Munnar',
-      state: 'Kerala',
-      tagline: 'Misty tea plantations, waterfalls & hills',
-      placesCount: '8+ Spots',
-      avgBudget: '₹6,000 for 3 Days',
-    },
-    {
-      city: 'Agra',
-      state: 'Uttar Pradesh',
-      tagline: 'Taj Mahal wonder, Mughal architecture & crafts',
-      placesCount: '6+ Spots',
-      avgBudget: '₹3,500 for 2 Days',
-    },
-  ];
+const steps = [
+  { icon: MapPin, title: 'Choose a destination', detail: 'Explore places by city and interest, then save the sights you want to include.' },
+  { icon: CalendarDays, title: 'Shape your trip', detail: 'Set your dates, group size, budget, pace and travel interests.' },
+  { icon: Compass, title: 'Make it yours', detail: 'Review your day-by-day itinerary and find all your plans in one place.' },
+];
 
-  const highlights = [
-    {
-      icon: Navigation2,
-      title: 'No Zigzagging Routes',
-      desc: 'Our intelligent clustering algorithm groups adjacent sights per day, cutting transit time so you spend hours exploring instead of sitting in traffic.',
-      color: 'text-brand-600 bg-brand-50 border-brand-200',
-    },
-    {
-      icon: DollarSign,
-      title: 'Realistic Budget Forecast',
-      desc: 'Break down every single rupee across transport, entry tickets, dining, and stay with active alerts if your wishlist exceeds your planned budget.',
-      color: 'text-ocean-600 bg-ocean-50 border-ocean-200',
-    },
-    {
-      icon: Luggage,
-      title: 'Smart Packing Checklist',
-      desc: 'Automatically pre-populates essentials and category-triggered items (beachwear for Goa, trekking gear for hills) so you never leave crucial items behind.',
-      color: 'text-amber-600 bg-amber-50 border-amber-200',
-    },
-    {
-      icon: Clock,
-      title: 'Tailored Pacing',
-      desc: 'Choose between Relaxed (leisurely starts, longer stops), Balanced (classic sightseeing), or Packed (maximize every hour) travel styles.',
-      color: 'text-rose-600 bg-rose-50 border-rose-200',
-    },
-  ];
-
+export default function Home() {
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col selection:bg-brand-500 selection:text-white">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 border-b border-slate-200/80 bg-gradient-to-b from-white via-brand-50/20 to-slate-50">
-        {/* Decorative background glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-r from-brand-200/40 via-ocean-200/40 to-sunset-100/40 blur-3xl -z-10 pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto space-y-6">
-            {/* Pill badge */}
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-brand-600 animate-spin" />
-              <span>Smart Travel Planning for Short 2-4 Day Vacations</span>
+    <div className="bg-white">
+      <section className="relative overflow-hidden bg-slate-950 text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_20%,rgba(16,185,129,0.24),transparent_42%),radial-gradient(ellipse_at_15%_90%,rgba(14,165,233,0.18),transparent_40%)]" />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-emerald-200">
+              <Sparkles className="h-4 w-4" />
+              A clearer way to plan a getaway
             </div>
-
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight font-heading leading-tight">
-              Turn Your Weekend Into an{' '}
-              <span className="bg-gradient-to-r from-brand-600 via-ocean-600 to-brand-500 bg-clip-text text-transparent">
-                Unforgettable Journey
-              </span>
+            <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+              Less time planning.
+              <span className="mt-1 block text-emerald-300">More time out there.</span>
             </h1>
-
-            {/* Subheading */}
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-              TravelWise crafts optimized, day-wise itineraries matching your exact budget, interests, and preferred pacing. No wasted transit, no budget surprises.
+            <p className="mt-5 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
+              Find places worth seeing, build a trip around your interests and keep every itinerary together.
             </p>
-
-            {/* Hero CTA buttons */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/create-trip"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold text-white bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-700 hover:to-brand-600 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:-translate-y-0.5 transition-all flex items-center justify-center space-x-2"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-400 px-5 py-3.5 font-bold text-slate-950 transition hover:bg-emerald-300"
               >
-                <Compass className="w-5 h-5" />
-                <span>Start Planning Free</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
+                Plan a trip <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/places"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300/80 shadow-sm hover:shadow transition-all flex items-center justify-center space-x-2"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3.5 font-semibold text-white transition hover:bg-white/10"
               >
-                <MapPin className="w-5 h-5 text-slate-500" />
-                <span>Explore Top Places</span>
+                <MapPin className="h-4 w-4" /> Explore destinations
               </Link>
             </div>
-
-            {/* Quick Metrics Bar */}
-            <div className="pt-8 border-t border-slate-200/60 grid grid-cols-3 gap-4 max-w-lg mx-auto text-center">
-              <div>
-                <p className="text-2xl font-black text-slate-900 font-heading">50+</p>
-                <p className="text-xs text-slate-500 font-medium">Curated Attractions</p>
-              </div>
-              <div>
-                <p className="text-2xl font-black text-slate-900 font-heading">100%</p>
-                <p className="text-xs text-slate-500 font-medium">Optimized Transit</p>
-              </div>
-              <div>
-                <p className="text-2xl font-black text-slate-900 font-heading">₹0</p>
-                <p className="text-xs text-slate-500 font-medium">Hidden Booking Fees</p>
-              </div>
-            </div>
+            <p className="mt-4 text-sm text-slate-400">Explore first. Sign in when you’re ready to save a trip.</p>
           </div>
-        </div>
-      </section>
 
-      {/* Feature Value Props */}
-      <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">
-            Engineered for Short Getaways
-          </h2>
-          <p className="text-3xl font-extrabold text-slate-900 font-heading tracking-tight">
-            Why Generic Travel Guides Fall Short
-          </p>
-          <p className="text-slate-600 text-sm mt-3">
-            Short trips fail when you spend 4 hours in transit between opposite ends of a city. TravelWise solves this with algorithmic scheduling.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {highlights.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 flex flex-col justify-between group"
-              >
+          <div className="relative mx-auto w-full max-w-lg">
+            <div className="absolute -inset-4 rounded-[2rem] bg-emerald-400/10 blur-2xl" />
+            <div className="relative rounded-[1.75rem] border border-white/15 bg-white/[0.08] p-5 shadow-2xl backdrop-blur">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <div>
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center border mb-5 ${item.color} group-hover:scale-110 transition-transform duration-200`}>
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2 font-heading">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {item.desc}
-                  </p>
+                  <p className="text-sm text-slate-300">Your next getaway</p>
+                  <p className="mt-1 text-xl font-bold">A few days in Goa</p>
                 </div>
+                <span className="rounded-full bg-emerald-300/15 px-3 py-1 text-xs font-semibold text-emerald-200">3 days</span>
               </div>
-            );
-          })}
+              <div className="space-y-3 py-4">
+                {[
+                  ['Day 1', 'Old Goa & Panaji'],
+                  ['Day 2', 'Beaches & local cafés'],
+                  ['Day 3', 'A slow morning by the coast'],
+                ].map(([day, plan], index) => (
+                  <div key={day} className="flex items-center gap-4 rounded-xl bg-slate-900/50 p-3.5">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white/10 text-xs font-bold text-emerald-200">
+                      0{index + 1}
+                    </span>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{day}</p>
+                      <p className="mt-0.5 text-sm font-semibold">{plan}</p>
+                    </div>
+                    <MapPin className="ml-auto h-4 w-4 text-emerald-300" />
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-center gap-2 border-t border-white/10 pt-4 text-sm text-slate-300">
+                <Compass className="h-4 w-4 text-emerald-300" />
+                One plan, organized day by day
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Popular Weekend Destinations */}
-      <section className="py-16 bg-white border-y border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-600">
-                Top Hubs in India
-              </span>
-              <h2 className="text-3xl font-extrabold text-slate-900 font-heading tracking-tight mt-1">
-                Popular Weekend Getaways
-              </h2>
-              <p className="text-slate-600 text-sm mt-2">
-                Curated destination databases ready for instant itinerary building.
-              </p>
-            </div>
-            <Link
-              to="/places"
-              className="mt-4 md:mt-0 inline-flex items-center space-x-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700"
-            >
-              <span>View all attractions</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-emerald-700">Find your next stop</p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">Explore popular destinations</h2>
+            <p className="mt-2 max-w-xl text-slate-600">Start with a city, browse its places, and build a trip that suits you.</p>
           </div>
+          <Link to="/places" className="inline-flex items-center gap-2 text-sm font-bold text-emerald-700 hover:text-emerald-800">
+            Browse all places <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredDestinations.map((dest, i) => (
-              <div
-                key={i}
-                onClick={() => navigate(`/create-trip?city=${dest.city}`)}
-                className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/80 cursor-pointer bg-slate-900"
-              >
-                <div className="h-64 w-full overflow-hidden">
-                  <PlaceImage name={dest.city} className="w-full h-full" />
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {destinations.map((destination) => (
+            <Link
+              key={destination.city}
+              to={`/create-trip?city=${encodeURIComponent(destination.city)}`}
+              className={`group rounded-2xl border border-slate-200 bg-gradient-to-br ${destination.style} p-5 transition hover:-translate-y-0.5 hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/80 text-emerald-800">
+                  <MapPin className="h-5 w-5" />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-6 text-white">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-brand-500/90 text-white backdrop-blur-md">
-                      {dest.placesCount}
-                    </span>
-                    <span className="text-xs text-slate-300 font-medium">{dest.avgBudget}</span>
-                  </div>
-                  <h3 className="text-2xl font-black font-heading text-white tracking-wide">
-                    {dest.city}
-                  </h3>
-                  <p className="text-xs text-slate-300 line-clamp-1 mt-1 font-light">
-                    {dest.tagline}
-                  </p>
-                  <div className="mt-4 pt-3 border-t border-white/20 flex items-center justify-between text-xs font-semibold text-brand-300 group-hover:text-brand-200">
-                    <span>Plan a trip here</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
+                <ArrowRight className="h-5 w-5 text-slate-500 transition group-hover:translate-x-1 group-hover:text-slate-900" />
               </div>
+              <p className="mt-8 text-xs font-semibold uppercase tracking-wider text-slate-600">{destination.state}</p>
+              <h3 className="mt-1 text-2xl font-bold text-slate-900">{destination.city}</h3>
+              <p className="mt-1 text-sm text-slate-700">{destination.detail}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-y border-slate-200 bg-slate-50">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="max-w-2xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-emerald-700">A simple flow</p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">From an idea to a trip you can follow</h2>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {steps.map(({ icon: Icon, title, detail }, index) => (
+              <article key={title} className="rounded-2xl border border-slate-200 bg-white p-6">
+                <div className="flex items-center justify-between">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-emerald-700">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="text-sm font-bold text-slate-300">0{index + 1}</span>
+                </div>
+                <h3 className="mt-5 text-lg font-bold text-slate-900">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{detail}</p>
+              </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* How It Works (3 Steps) */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-600">
-            Effortless Workflow
-          </span>
-          <h2 className="text-3xl font-extrabold text-slate-900 font-heading tracking-tight mt-1">
-            How TravelWise Plans Your Trip in 30 Seconds
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          <div className="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm relative">
-            <span className="w-10 h-10 rounded-full bg-brand-500 text-white font-bold flex items-center justify-center text-sm shadow-md mb-6">
-              01
-            </span>
-            <h3 className="text-lg font-bold text-slate-900 mb-2 font-heading">
-              Input Budget & Duration
-            </h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Tell us your starting city, vacation length (e.g., 2 or 3 days), your total budget in ₹ INR, and who is traveling with you.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm relative">
-            <span className="w-10 h-10 rounded-full bg-ocean-500 text-white font-bold flex items-center justify-center text-sm shadow-md mb-6">
-              02
-            </span>
-            <h3 className="text-lg font-bold text-slate-900 mb-2 font-heading">
-              Select Your Interests & Style
-            </h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Pick your passions: Heritage, Nature, Beaches, Food, or Adventure, and set your style from Relaxed to Fast-paced.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm relative">
-            <span className="w-10 h-10 rounded-full bg-sunset-500 text-white font-bold flex items-center justify-center text-sm shadow-md mb-6">
-              03
-            </span>
-            <h3 className="text-lg font-bold text-slate-900 mb-2 font-heading">
-              Receive Complete Plan & Checklist
-            </h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Instantly view your day-by-day timetable, itemized expense forecast, and customized packing checklist ready to check off.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Bottom CTA Card */}
-      <section className="pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-brand-950 p-8 sm:p-12 lg:p-16 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
-          <div className="max-w-xl space-y-4 text-center md:text-left z-10">
-            <h2 className="text-3xl sm:text-4xl font-black font-heading tracking-tight leading-tight">
-              Ready to take the stress out of vacation planning?
-            </h2>
-            <p className="text-slate-300 text-sm sm:text-base font-light">
-              Join travelers who build realistic, unforgettable itineraries in seconds.
-            </p>
-          </div>
-          <div className="mt-8 md:mt-0 z-10">
-            <Link
-              to="/create-trip"
-              className="px-8 py-4 rounded-xl text-base font-bold text-slate-900 bg-white hover:bg-brand-50 hover:text-brand-700 shadow-xl transition-all transform hover:-translate-y-0.5 inline-flex items-center space-x-2"
-            >
-              <span>Create My Trip Now</span>
-              <ArrowRight className="w-4 h-4" />
+          <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-2xl bg-slate-900 p-6 text-white sm:flex-row sm:items-center sm:p-8">
+            <div>
+              <h3 className="text-xl font-bold">Have a destination in mind?</h3>
+              <p className="mt-1 text-sm text-slate-300">Put together your next trip in a few guided steps.</p>
+            </div>
+            <Link to="/create-trip" className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-emerald-400 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-emerald-300">
+              Start planning <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
       </section>
     </div>
   );
-};
-
-export default Home;
+}
