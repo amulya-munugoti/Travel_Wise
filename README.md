@@ -1,6 +1,6 @@
-# TravelWise – Smart Travel Planning Platform ✈️
+# TravelWise – Trip Planner
 
-> Intelligent, stress-free travel planning designed specifically for short 2-4 day vacations and weekend getaways.
+> Discover places, plan day-by-day trips, and keep itineraries together.
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-19.0+-61DAFB.svg?logo=react&logoColor=black)](https://react.dev/)
@@ -9,30 +9,23 @@
 
 ---
 
-## 🌟 The Problem & The Solution
+## What TravelWise does
 
-### The Problem
-When travelers only have 2 to 4 days of vacation (e.g., long weekends, short holidays), standard travel guides and manual planning fail:
-- **Zigzagging Routes**: Travelers waste 3-5 hours traveling between opposite corners of a city because they visited sights in an arbitrary order.
-- **Budget Uncertainty**: Hidden entry fees, local cab rides, and dining easily push travelers over budget with no real-time warning.
-- **Forgotten Essentials**: Travelers scramble or forget location-specific gear (e.g., swimwear for beaches or trekking shoes for hill stations).
-
-### The TravelWise Solution
-TravelWise uses an algorithmic clustering and pacing engine to turn basic inputs (starting point, budget in ₹ INR, duration, and interests) into an optimized, practical itinerary:
-1. **No Zigzagging**: Groups geographically adjacent spots per day based on real coordinates.
-2. **Itemized Expense Forecast**: Breaks down expenses across 5 buckets (Stay, Food, Transit, Tickets, Emergency buffer) with active over-budget detection.
-3. **Automated Packing Checklist**: Pre-populates category-triggered essentials (beach, trek, heritage) ready to check off.
+TravelWise keeps trip planning centered on four steps:
+1. **Discover destinations** in the curated places catalogue and filter by city, interest, or search.
+2. **Build a trip** by choosing its destination, duration, travelers, budget, pace, interests, and optional places.
+3. **Review the itinerary** with activities organized by day. Trip details also include the available budget and packing-list tools.
+4. **Return to saved trips** to reopen or remove itineraries. Browsing and filling out the planner do not require an account; sign-in is required to save a trip.
 
 ---
 
-## 🚀 Key Features
+## Features
 
-- **Personalized 3-Step Wizard**: Choose Starting Hub, Destination, Vacation Length (1-5 days), Travelers, Total Budget (₹), Travel Style (Relaxed, Balanced, Packed), and Multi-select Interests.
-- **Intelligent Day-by-Day Timetable**: Chronological morning-to-night flow with scheduled activity slots, visit durations, and realistic travel transit buffers between spots.
-- **Curated Attraction Database**: 50+ rich places across top Indian destinations (Hyderabad, Goa, Jaipur, Bengaluru, Munnar, Agra) with entry fees, coordinates, and categories.
-- **Comprehensive Expense Forecaster**: Visual budget health bar, 5-bucket categorization, per-traveler averages, and cost-saving tips.
-- **Interactive Packing Checklist**: Pre-filled essentials with dynamic category items, custom item addition, checkoff toggle, and progress percentage.
-- **Multi-Device Responsive Design**: Glassmorphic styling, emerald & ocean palette, accessible micro-interactions, and print-ready summary.
+- **Destination discovery** with city, interest, and text filters; place selections carry into trip creation.
+- **Guided trip creation** for destination, duration, group size, budget, travel pace, and interests.
+- **Day-by-day itineraries** with relevant trip details, including budget and packing checklist views.
+- **Saved trips** for reopening and managing planned itineraries.
+- **Responsive navigation** with public discovery and account-protected trip storage.
 - **Dual-Database Support**: Out-of-the-box zero-dependency SQLite fallback for immediate local testing, plus production PostgreSQL support.
 
 ---
@@ -84,7 +77,7 @@ Travel_Wise/
 │   ├── src/
 │   │   ├── components/      # Navbar, Footer, PlaceCard, LoadingSpinner, ProtectedRoute
 │   │   ├── context/         # AuthContext (JWT token storage & auto-session)
-│   │   ├── pages/           # Home, Login, Register, Dashboard, CreateTrip, Places, Itinerary, SavedTrips, Profile
+│   │   ├── pages/           # Home, Login, Register, CreateTrip, Places, Itinerary, SavedTrips, Profile
 │   │   ├── services/        # Centralized Axios API client
 │   │   ├── utils/           # Currency (₹ INR), duration, and distance formatters
 │   │   ├── App.jsx          # Route configuration
@@ -108,28 +101,11 @@ Travel_Wise/
 
 ## Runtime architecture
 
-TravelWise has no JavaScript backend. The React/Vite application is the only
-JavaScript runtime and is responsible solely for the browser UI. FastAPI
-(Python) owns authentication, database access, recommendation scoring,
-itinerary generation, budgets, checklists, location/geocoding, nearby-place
-distance calculations, provider-photo proxying, and image geo-tag validation.
-
-## Live location discovery
-
-TravelWise always supports its verified, coordinate-based local catalogue. To
-discover live attractions, restaurants, cafes and hotels worldwide, enable
-**Places API (New)** and the **Geocoding API** in Google Cloud and add this
-server-only setting to a root `.env` file (copy `.env.example` first):
-
-```env
-GOOGLE_MAPS_API_KEY="your-server-side-google-places-key"
-```
-
-The key is used only by FastAPI. The browser calls `/api/places/nearby` and
-the backend proxies provider-owned photos, so the key is never exposed to the
-frontend. Without it, manual city search and nearby discovery continue to use
-TravelWise's real curated coordinates and show a labelled placeholder instead
-of an unrelated photo.
+TravelWise has no JavaScript backend. React/Vite provides the browser
+experience; FastAPI owns authentication, database access, the curated place
+catalogue, itinerary generation, and trip data. Additional location and image
+endpoints remain available in the backend but are not part of the primary
+trip-planning interface.
 
 ## ⚡ Quick Start (Local Development)
 
