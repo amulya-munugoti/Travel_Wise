@@ -171,9 +171,9 @@ export const CreateTrip = () => {
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Wizard Header */}
         <div className="text-center max-w-xl mx-auto space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200/80 text-xs font-medium text-slate-700 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Signed in as <strong className="text-slate-900 font-semibold">{user?.full_name || user?.email}</strong></span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-medium text-slate-700 shadow-sm">
+            <span className={`h-2 w-2 rounded-full ${user ? 'bg-emerald-500' : 'bg-sky-500'}`}></span>
+            <span>{user ? <>Planning as <strong className="font-semibold text-slate-900">{user.full_name || user.email}</strong></> : 'Plan your trip now; sign in when you’re ready to save it.'}</span>
           </div>
 
           <div className="flex items-center justify-center space-x-2 text-xs font-bold text-brand-600 uppercase tracking-widest">
@@ -184,7 +184,7 @@ export const CreateTrip = () => {
             Plan Your Vacation
           </h1>
           <p className="text-xs sm:text-sm text-slate-500">
-            Customize duration, destinations, and what you want to experience. Our engine will cluster spots and optimize your schedule.
+            Set your destination, trip length and interests. We’ll turn your choices into a day-by-day itinerary.
           </p>
         </div>
 

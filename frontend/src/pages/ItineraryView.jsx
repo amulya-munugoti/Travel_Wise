@@ -154,11 +154,11 @@ export const ItineraryView = () => {
         <h2 className="text-xl font-bold text-slate-800">Trip Not Found</h2>
         <p className="text-sm text-slate-500 mt-2">The requested itinerary could not be loaded.</p>
         <Link
-          to="/dashboard"
+          to="/saved-trips"
           className="mt-4 inline-flex items-center space-x-2 px-4 py-2 bg-brand-600 text-white text-xs font-bold rounded-xl"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Return to Dashboard</span>
+          <span>Return to My Trips</span>
         </Link>
       </div>
     );

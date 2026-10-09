@@ -16,8 +16,8 @@ export const Login = () => {
   const from = location.state?.from
     ? typeof location.state.from === 'string'
       ? location.state.from
-      : `${location.state.from.pathname || '/dashboard'}${location.state.from.search || ''}`
-    : '/dashboard';
+      : `${location.state.from.pathname || '/saved-trips'}${location.state.from.search || ''}`
+    : '/saved-trips';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
