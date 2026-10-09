@@ -9,7 +9,6 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
 import CreateTrip from './pages/CreateTrip';
 import RecommendedPlaces from './pages/RecommendedPlaces';
 import ItineraryView from './pages/ItineraryView';
@@ -24,29 +23,13 @@ function App() {
           <Navbar />
           <main className="flex-1">
             <Routes>
-              {/* Authentication is required before accessing TravelWise features. */}
-              <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-              <Route path="/places" element={<ProtectedRoute><RecommendedPlaces /></ProtectedRoute>} />
+              <Route path="/" element={<Home />} />
+              <Route path="/places" element={<RecommendedPlaces />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
 
-              {/* Protected Routes - Only accessible after login */}
-              <Route
-                path="/create-trip"
-                element={
-                  <ProtectedRoute>
-                    <CreateTrip />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="/create-trip" element={<CreateTrip />} />
+              <Route path="/dashboard" element={<Navigate to="/saved-trips" replace />} />
               <Route
                 path="/itinerary/:id"
                 element={
