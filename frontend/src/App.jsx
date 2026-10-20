@@ -23,14 +23,7 @@ function App() {
           <Navbar />
           <main className="flex-1">
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="/" element={<Home />} />
               <Route
                 path="/places"
                 element={
