@@ -9,6 +9,7 @@ export default function Navbar() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
 
   const links = [
     { label: 'Home', to: '/' },
@@ -43,7 +44,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <nav aria-label="Main navigation" className="hidden items-center gap-1 md:flex">
+        {!isAuthPage && <nav aria-label="Main navigation" className="hidden items-center gap-1 md:flex">
           {links.map(({ label, to, icon: Icon }) => {
             const active = location.pathname === to || (to === '/saved-trips' && location.pathname === '/dashboard');
             return (
@@ -64,9 +65,9 @@ export default function Navbar() {
               Plan a trip
             </Link>
           )}
-        </nav>
+        </nav>}
 
-        <div className="hidden items-center gap-3 md:flex">
+        {!isAuthPage && <div className="hidden items-center gap-3 md:flex">
           {isAuthenticated ? (
             <div className="relative">
               <button
@@ -96,9 +97,9 @@ export default function Navbar() {
               <Link to="/register" className="rounded-lg border border-slate-200 px-3.5 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">Create account</Link>
             </>
           )}
-        </div>
+        </div>}
 
-        <button
+        {!isAuthPage && <button
           type="button"
           aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileMenuOpen}
@@ -106,10 +107,10 @@ export default function Navbar() {
           className="grid h-10 w-10 place-items-center rounded-lg text-slate-700 hover:bg-slate-100 md:hidden"
         >
           {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        </button>}
       </div>
 
-      {mobileMenuOpen && (
+      {!isAuthPage && mobileMenuOpen && (
         <nav aria-label="Mobile navigation" className="border-t border-slate-200 bg-white px-4 py-3 md:hidden">
           <div className="mx-auto max-w-7xl space-y-1">
             {links.map(({ label, to, icon: Icon }) => (

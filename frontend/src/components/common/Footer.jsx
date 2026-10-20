@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Compass, MapPin } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export default function Footer() {
   const { isAuthenticated } = useAuth();
+  const { pathname } = useLocation();
+
+  if (pathname === '/login' || pathname === '/register') return null;
 
   return (
     <footer className="border-t border-slate-200 bg-white">

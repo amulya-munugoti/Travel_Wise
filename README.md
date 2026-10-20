@@ -15,7 +15,7 @@ TravelWise keeps trip planning centered on four steps:
 1. **Discover destinations** in the curated places catalogue and filter by city, interest, or search.
 2. **Build a trip** by choosing its destination, duration, travelers, budget, pace, interests, and optional places.
 3. **Review the itinerary** with activities organized by day. Trip details also include the available budget and packing-list tools.
-4. **Return to saved trips** to reopen or remove itineraries. A public welcome page explains the product; sign-in is required to explore destinations, use the planner, and access saved trip data.
+4. **Return to saved trips** to reopen or remove itineraries. Sign-in is required to enter the workspace, explore destinations, use the planner, and access saved trip data. Only sign-in and account creation are available before authentication.
 
 ---
 
@@ -25,7 +25,7 @@ TravelWise keeps trip planning centered on four steps:
 - **Guided trip creation** for destination, duration, group size, budget, travel pace, and interests.
 - **Day-by-day itineraries** with relevant trip details, including budget and packing checklist views.
 - **Saved trips** for reopening and managing planned itineraries.
-- **Responsive navigation** with a focused public welcome page and account-protected discovery, planning, and trip storage.
+- **Responsive navigation** with sign-in-first access to discovery, planning, and trip storage.
 - **Dual-Database Support**: Out-of-the-box zero-dependency SQLite fallback for immediate local testing, plus production PostgreSQL support.
 
 ---
