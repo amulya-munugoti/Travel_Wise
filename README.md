@@ -240,3 +240,6 @@ For immediate testing, you can register a new account or click the **"Fill Demo 
    sudo certbot --nginx -d yourdomain.com
    ```
    AWS Project
+
+
+ALL RIGHTS RESERVED TO AMULYA MUNNUGOTI
