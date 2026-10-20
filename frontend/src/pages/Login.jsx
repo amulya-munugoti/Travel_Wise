@@ -96,7 +96,7 @@ export const Login = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="Enter your password"
                 className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-4 text-sm text-slate-900 transition focus:border-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-700/10"
               />
             </div>
