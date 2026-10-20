@@ -24,11 +24,25 @@ function App() {
           <main className="flex-1">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/places" element={<RecommendedPlaces />} />
+              <Route
+                path="/places"
+                element={
+                  <ProtectedRoute>
+                    <RecommendedPlaces />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
 
-              <Route path="/create-trip" element={<CreateTrip />} />
+              <Route
+                path="/create-trip"
+                element={
+                  <ProtectedRoute>
+                    <CreateTrip />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/dashboard" element={<Navigate to="/saved-trips" replace />} />
               <Route
                 path="/itinerary/:id"

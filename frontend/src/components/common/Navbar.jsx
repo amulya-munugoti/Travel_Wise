@@ -12,9 +12,13 @@ export default function Navbar() {
 
   const links = [
     { label: 'Home', to: '/' },
-    { label: 'Explore places', to: '/places', icon: MapPin },
-    { label: 'My trips', to: '/saved-trips', icon: Bookmark, protected: true },
-  ].filter((link) => !link.protected || isAuthenticated);
+    ...(isAuthenticated
+      ? [
+          { label: 'Explore places', to: '/places', icon: MapPin },
+          { label: 'My trips', to: '/saved-trips', icon: Bookmark },
+        ]
+      : []),
+  ];
 
   const closeMenus = () => {
     setMobileMenuOpen(false);
@@ -55,9 +59,11 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <Link to="/create-trip" className="ml-2 rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-800">
-            Plan a trip
-          </Link>
+          {isAuthenticated && (
+            <Link to="/create-trip" className="ml-2 rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-800">
+              Plan a trip
+            </Link>
+          )}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
@@ -112,12 +118,12 @@ export default function Navbar() {
                 {label}
               </Link>
             ))}
-            <Link to="/create-trip" onClick={closeMenus} className="flex items-center justify-center rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-bold text-white">
-              Plan a trip
-            </Link>
             {isAuthenticated ? (
               <div className="border-t border-slate-100 pt-2">
                 <p className="px-3 py-2 text-xs text-slate-500">{user?.email}</p>
+                <Link to="/create-trip" onClick={closeMenus} className="mb-1 flex items-center justify-center rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-bold text-white">
+                  Plan a trip
+                </Link>
                 <Link to="/profile" onClick={closeMenus} className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50">
                   <UserRound className="h-4 w-4" /> Travel preferences
                 </Link>
