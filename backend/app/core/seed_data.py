@@ -497,3 +497,20 @@ SAMPLE_PLACES = [
         "closing_time": "18:00"
     }
 ]
+
+# Only attach photos that were matched to the named attraction. The remaining
+# cards use PlaceImage's named fallback instead of unrelated stock imagery.
+VERIFIED_PLACE_IMAGES = {
+    "Charminar & Laad Bazaar": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Charminar-Pride_of_Hyderabad.jpg",
+    "Qutb Shahi Tombs": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Tomb_of_Muhammad_Quli_Qutb_Shah.jpg",
+    "Baga Beach": "https://upload.wikimedia.org/wikipedia/commons/0/0d/BagaBeachPanorana.jpg",
+    "Palolem Beach": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Palolem_beach%2C_Goa_-_panoramio.jpg",
+    "Hawa Mahal (Palace of Winds)": "https://upload.wikimedia.org/wikipedia/commons/8/82/Hawa_Mahal_front_view.JPG",
+    "Jal Mahal Viewpoint": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Jal_Mahal_in_Man_Sagar_Lake.jpg",
+    "Vidhana Soudha": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Vidhana_Soudha_close.jpg",
+    "Mattupetty Dam & Lake Boating": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Mattupetty_Dam.jpg",
+    "Taj Mahal": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Taj_Mahal%2C_Agra%2C_India.jpg/1280px-Taj_Mahal%2C_Agra%2C_India.jpg",
+}
+
+for place in SAMPLE_PLACES:
+    place["image_url"] = VERIFIED_PLACE_IMAGES.get(place["name"])
