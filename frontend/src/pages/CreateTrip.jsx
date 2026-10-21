@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { formatCurrency } from '../utils/formatters';
 
-const POPULAR_CITIES = ['Hyderabad', 'Goa', 'Jaipur', 'Bengaluru', 'Munnar', 'Agra'];
+const POPULAR_CITIES = ['Hyderabad', 'Goa', 'Jaipur', 'Bengaluru', 'Nandi Hills', 'Munnar', 'Agra'];
 
 const INTEREST_OPTIONS = [
   { id: 'Nature', label: 'Nature & Parks', icon: '🌿' },

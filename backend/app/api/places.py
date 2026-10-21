@@ -12,7 +12,7 @@ from app.models.place import Place
 from app.models.travel_image import TravelImage
 from app.schemas.place import PlaceResponse, PlaceCreate, RecommendationRequest, LocationSearchRequest, NearbyPlaceResponse, GeocodedLocation
 from app.schemas.travel_image import TravelImageResponse
-from app.services.recommendation import get_recommended_places
+from app.services.recommendation import get_recommended_places, normalize_city
 from app.services.places_provider import curated_nearby, geocode, google_nearby, fetch_google_photo, haversine_km, reverse_geocode
 
 router = APIRouter(prefix="/places", tags=["Places"])
@@ -118,7 +118,11 @@ def get_places(
     query = db.query(Place)
     
     if city and city.lower() != "all":
-        query = query.filter(Place.city.ilike(f"%{city.strip()}%"))
+        normalized_city = normalize_city(city)
+        if normalized_city != city.split(",", 1)[0].strip().lower():
+            query = query.filter(Place.city.ilike(normalized_city))
+        else:
+            query = query.filter(Place.city.ilike(f"%{city.strip()}%"))
     if category and category.lower() != "all":
         query = query.filter(Place.category.ilike(f"%{category.strip()}%"))
     if max_cost is not None:

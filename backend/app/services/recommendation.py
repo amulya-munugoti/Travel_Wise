@@ -30,8 +30,6 @@ KNOWN_CITY_COORDINATES: Dict[str, Tuple[float, float]] = {
 
 CITY_ALIASES = {
     "bangalore": "bengaluru",
-    "north goa": "goa",
-    "south goa": "goa",
     "nandi hills": "chikkaballapur",
 }
 
@@ -76,8 +74,8 @@ def supported_destinations(db: Session) -> List[str]:
 def unsupported_destination_detail(db: Session, destination: str) -> str:
     cities = ", ".join(supported_destinations(db))
     return (
-        f"TravelWise currently has verified catalogue places for {cities}. "
-        f"It has no verified places for {destination.strip()!r}, so it cannot build an accurate itinerary there."
+        f"TravelWise currently has curated catalogue places for {cities}. "
+        f"It has no catalogue places for {destination.strip()!r}, so it cannot build a destination-specific itinerary there."
     )
 
 
