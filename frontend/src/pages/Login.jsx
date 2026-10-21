@@ -29,9 +29,16 @@ export const Login = () => {
       navigate(from, { replace: true });
     } catch (err) {
       console.error('Login error:', err);
-      setError(
-        err.response?.data?.detail || 'Invalid email or password. Please verify your credentials.'
-      );
+      const detail = err.response?.data?.detail;
+      if (typeof detail === 'string') {
+        setError(detail);
+      } else if (Array.isArray(detail)) {
+        setError(detail.map((item) => item.msg).filter(Boolean).join(' '));
+      } else if (!err.response) {
+        setError('Could not connect to TravelWise. Check that the app servers are running and try again.');
+      } else {
+        setError('Invalid email or password. Please verify your credentials.');
+      }
     } finally {
       setLoading(false);
     }
@@ -46,6 +53,17 @@ export const Login = () => {
           <p className="mt-2 text-sm leading-6 text-slate-600">
             Access your trips, itineraries and travel preferences.
           </p>
+          <button
+            type="button"
+            onClick={() => {
+              setEmail('traveler@travelwise.com');
+              setPassword('TravelWise@123');
+              setError('');
+            }}
+            className="mt-3 text-sm font-semibold text-emerald-800 hover:text-emerald-950"
+          >
+            Fill demo credentials
+          </button>
         </div>
 
         {location.state?.from && (
@@ -55,7 +73,7 @@ export const Login = () => {
         )}
 
         {error && (
-          <div className="flex items-center space-x-2 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm">
+          <div role="alert" aria-live="polite" className="flex items-center space-x-2 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
           </div>

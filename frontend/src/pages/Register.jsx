@@ -37,7 +37,7 @@ export const Register = () => {
         email,
         password,
         full_name: fullName,
-        home_city: homeCity,
+        home_location: homeCity,
       });
       navigate(from, { replace: true });
     } catch (err) {

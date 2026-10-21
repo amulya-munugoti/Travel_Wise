@@ -69,7 +69,7 @@ export const CreateTrip = () => {
   const [error, setError] = useState('');
 
   // Form State
-  const [startingLocation, setStartingLocation] = useState(user?.home_city || 'Hyderabad');
+  const [startingLocation, setStartingLocation] = useState(user?.home_location || 'Hyderabad');
   const [destination, setDestination] = useState(searchParams.get('city') || 'Hyderabad');
   const [numberOfDays, setNumberOfDays] = useState(2);
   const [numberOfTravelers, setNumberOfTravelers] = useState(2);
@@ -82,8 +82,8 @@ export const CreateTrip = () => {
 
   // Auto-sync user's home city when user loads
   useEffect(() => {
-    if (user?.home_city && startingLocation === 'Hyderabad') {
-      setStartingLocation(user.home_city);
+    if (user?.home_location && startingLocation === 'Hyderabad') {
+      setStartingLocation(user.home_location);
     }
   }, [user]);
 

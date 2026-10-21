@@ -39,11 +39,11 @@ def init_db():
         db.commit()
 
         # Ensure demo user exists
-        demo_user = db.query(User).filter(User.email == "demo@travelwise.io").first()
+        demo_user = db.query(User).filter(User.email == "traveler@travelwise.com").first()
         if not demo_user:
             demo_user = User(
-                email="demo@travelwise.io",
-                hashed_password=get_password_hash("Travel@123"),
+                email="traveler@travelwise.com",
+                hashed_password=get_password_hash("TravelWise@123"),
                 full_name="Demo Traveler",
                 home_location="Hyderabad",
                 preferred_travel_style="balanced",
@@ -53,7 +53,7 @@ def init_db():
             )
             db.add(demo_user)
             db.commit()
-            logger.info("Demo user 'demo@travelwise.io' created successfully.")
+            logger.info("Demo user 'traveler@travelwise.com' created successfully.")
     except Exception as e:
         logger.error(f"Error during database initialization: {e}")
         db.rollback()

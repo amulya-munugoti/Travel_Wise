@@ -7,7 +7,7 @@ export const Profile = () => {
   const { user, updateProfile } = useAuth();
 
   const [fullName, setFullName] = useState(user?.full_name || '');
-  const [homeCity, setHomeCity] = useState(user?.home_city || 'Hyderabad');
+  const [homeCity, setHomeCity] = useState(user?.home_location || 'Hyderabad');
   const [preferredTravelStyle, setPreferredTravelStyle] = useState(
     user?.preferred_travel_style || 'balanced'
   );
@@ -25,7 +25,7 @@ export const Profile = () => {
     try {
       await updateProfile({
         full_name: fullName,
-        home_city: homeCity,
+        home_location: homeCity,
         preferred_travel_style: preferredTravelStyle,
         default_budget: Number(defaultBudget),
       });
