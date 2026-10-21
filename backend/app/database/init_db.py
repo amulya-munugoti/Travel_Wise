@@ -31,11 +31,16 @@ def init_db():
             db.commit()
             logger.info(f"Successfully seeded {len(SAMPLE_PLACES)} destinations and places.")
 
-        # Legacy seed URLs were generic stock photography without a verifiable
-        # provider-place relationship. A clean labelled placeholder is safer
-        # than showing a potentially unrelated image. Live provider results use
-        # their own exact photo resource instead.
-        db.query(Place).filter(Place.image_url.isnot(None)).update({Place.image_url: None}, synchronize_session=False)
+        # Restore the image URLs shipped with the curated catalogue. Older
+        # startup code cleared these on every launch, leaving every seeded
+        # destination card without an image.
+        seeded_images = {
+            item["name"]: item["image_url"]
+            for item in SAMPLE_PLACES
+            if item.get("image_url")
+        }
+        for place in db.query(Place).filter(Place.name.in_(seeded_images)).all():
+            place.image_url = seeded_images[place.name]
         db.commit()
 
         # Ensure demo user exists
