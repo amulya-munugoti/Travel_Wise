@@ -1,11 +1,16 @@
 import math
 from typing import List, Dict, Any
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app.models.trip import Trip
 from app.models.itinerary import ItineraryDay, ItineraryItem
 from app.models.place import Place
 from app.schemas.place import RecommendationRequest
-from app.services.recommendation import get_recommended_places, haversine_distance_km
+from app.services.recommendation import (
+    get_recommended_places,
+    haversine_distance_km,
+    unsupported_destination_detail,
+)
 
 
 def cluster_places_by_proximity(places: List[Place], num_clusters: int) -> List[List[Place]]:
@@ -52,11 +57,8 @@ def generate_trip_itinerary(db: Session, trip: Trip) -> List[ItineraryDay]:
     """
     Generates a realistic, chronological, day-wise schedule for the trip.
     """
-    # 1. Clear any prior itinerary days for this trip
-    db.query(ItineraryDay).filter(ItineraryDay.trip_id == trip.id).delete()
-    db.commit()
-
-    # 2. Retrieve candidate places matching preferences
+    # Retrieve candidate places before changing the saved itinerary. Never
+    # substitute attractions from a different city when the catalogue has no match.
     interests_list = [i.strip() for i in (trip.interests or "Nature,Food,Sightseeing").split(",") if i.strip()]
     req = RecommendationRequest(
         starting_location=trip.starting_location,
@@ -70,6 +72,9 @@ def generate_trip_itinerary(db: Session, trip: Trip) -> List[ItineraryDay]:
     )
     
     recommended_place_resps = get_recommended_places(db, req, limit=req.limit)
+    if not recommended_place_resps:
+        raise HTTPException(status_code=422, detail=unsupported_destination_detail(db, trip.destination))
+
     place_ids = [p.id for p in recommended_place_resps]
     
     # Load actual place models
@@ -80,9 +85,12 @@ def generate_trip_itinerary(db: Session, trip: Trip) -> List[ItineraryDay]:
     if selected_places:
         candidate_places = selected_places + [place for place in candidate_places if place.id not in selected_ids]
 
-    # If no places found, pull any available places
     if not candidate_places:
-        candidate_places = db.query(Place).limit(trip.number_of_days * 4).all()
+        raise HTTPException(status_code=422, detail=unsupported_destination_detail(db, trip.destination))
+
+    # Keep the previous itinerary if a new candidate list could not be built.
+    db.query(ItineraryDay).filter(ItineraryDay.trip_id == trip.id).delete()
+    db.commit()
 
     # Determine slots per day according to travel style
     style = (trip.travel_style or "balanced").lower()

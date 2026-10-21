@@ -9,6 +9,7 @@ from app.models.itinerary import ItineraryDay, ItineraryItem
 from app.schemas.trip import TripCreate, TripUpdate, TripSummaryResponse, TripDetailResponse
 from app.api.deps import get_current_user
 from app.services.itinerary_engine import generate_trip_itinerary
+from app.services.recommendation import get_destination_places, unsupported_destination_detail
 from app.services.checklist_service import get_or_create_trip_checklist
 from app.services.budget_service import calculate_trip_budget
 
@@ -22,6 +23,9 @@ def create_trip(
     current_user: User = Depends(get_current_user)
 ):
     """Creates a new trip and automatically generates itinerary and packing checklist."""
+    if trip_in.auto_generate and not get_destination_places(db, trip_in.destination):
+        raise HTTPException(status_code=422, detail=unsupported_destination_detail(db, trip_in.destination))
+
     trip = Trip(
         user_id=current_user.id,
         title=trip_in.title.strip() or f"{trip_in.number_of_days}-Day Trip to {trip_in.destination}",
@@ -131,6 +135,8 @@ def update_trip(
         trip.starting_location = trip_update.starting_location.strip()
         regenerate_needed = True
     if trip_update.destination is not None:
+        if not get_destination_places(db, trip_update.destination):
+            raise HTTPException(status_code=422, detail=unsupported_destination_detail(db, trip_update.destination))
         trip.destination = trip_update.destination.strip()
         regenerate_needed = True
     if trip_update.number_of_days is not None and trip_update.number_of_days != trip.number_of_days:

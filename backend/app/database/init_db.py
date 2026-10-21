@@ -21,26 +21,29 @@ def init_db():
     
     db: Session = SessionLocal()
     try:
-        # Seed places if database has no places
-        existing_places_count = db.query(Place).count()
-        if existing_places_count == 0:
-            logger.info("Seeding initial places data...")
-            for place_dict in SAMPLE_PLACES:
-                place = Place(**place_dict)
-                db.add(place)
-            db.commit()
-            logger.info(f"Successfully seeded {len(SAMPLE_PLACES)} destinations and places.")
-
-        # Restore the image URLs shipped with the curated catalogue. Older
-        # startup code cleared these on every launch, leaving every seeded
-        # destination card without an image.
-        seeded_images = {
-            item["name"]: item["image_url"]
-            for item in SAMPLE_PLACES
-            if item.get("image_url")
+        # Keep the bundled curated catalogue in sync on startup so existing
+        # installations receive corrected names, locations, and new entries.
+        legacy_names = {
+            "Hyderabadi Dum Biryani Trail": "Mecca Masjid",
+            "Baga Beach & Water Sports": "Baga Beach",
+            "Fort Aguada & Lighthouse": "Fort Aguada",
+            "Palolem Beach & Kayaking": "Palolem Beach",
+            "Jal Mahal (Water Palace)": "Jal Mahal Viewpoint",
+            "Cubbon Park & Bamboo Groves": "Cubbon Park",
+            "Nandi Hills Sunrise Point": "Nandi Hills",
+            "Munnar Tea Plantations & Museum": "Tata Tea Museum",
         }
-        for place in db.query(Place).filter(Place.name.in_(seeded_images)).all():
-            place.image_url = seeded_images[place.name]
+        for place_data in SAMPLE_PLACES:
+            current = db.query(Place).filter(Place.name == place_data["name"]).first()
+            if not current:
+                old_name = next((old for old, new in legacy_names.items() if new == place_data["name"]), None)
+                if old_name:
+                    current = db.query(Place).filter(Place.name == old_name).first()
+            if current:
+                for field, value in place_data.items():
+                    setattr(current, field, value)
+            else:
+                db.add(Place(**place_data))
         db.commit()
 
         # Ensure demo user exists

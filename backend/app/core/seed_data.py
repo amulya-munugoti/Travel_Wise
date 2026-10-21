@@ -127,27 +127,27 @@ SAMPLE_PLACES = [
         "closing_time": "22:00"
     },
     {
-        "name": "Hyderabadi Dum Biryani Trail",
-        "description": "Authentic culinary journey through Hyderabad's legendary biryani hubs, Irani chai cafes, and famous royal desserts like double ka meetha.",
+        "name": "Mecca Masjid",
+        "description": "Historic mosque beside Charminar in Hyderabad's Old City. Visitors should follow current visitor guidance and respect prayer times.",
         "city": "Hyderabad",
         "state": "Telangana",
-        "address": "Old City / Secunderabad, Hyderabad",
-        "latitude": 17.4416,
-        "longitude": 78.4883,
-        "category": "Food",
-        "estimated_duration_hours": 1.5,
-        "estimated_cost": 400.0,
-        "best_visiting_time": "Afternoon",
-        "suitable_interests": "Food,Culinary,Culture,Dining",
-        "rating": 4.8,
-        "image_url": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80",
-        "opening_time": "11:30",
-        "closing_time": "23:00"
+        "address": "Charminar, Hyderabad, Telangana",
+        "latitude": 17.3604,
+        "longitude": 78.4736,
+        "category": "Culture",
+        "estimated_duration_hours": 1.0,
+        "estimated_cost": 0.0,
+        "best_visiting_time": "Outside prayer times",
+        "suitable_interests": "Culture,Architecture,History,Sightseeing",
+        "rating": 4.5,
+        "image_url": None,
+        "opening_time": "09:00",
+        "closing_time": "17:00"
     },
 
     # --- GOA ---
     {
-        "name": "Baga Beach & Water Sports",
+        "name": "Baga Beach",
         "description": "Lively coastal haven in North Goa renowned for water skiing, parasailing, dolphin watching trips, beach shacks, and tropical sunsets.",
         "city": "Goa",
         "state": "Goa",
@@ -165,7 +165,7 @@ SAMPLE_PLACES = [
         "closing_time": "23:00"
     },
     {
-        "name": "Fort Aguada & Lighthouse",
+        "name": "Fort Aguada",
         "description": "Well-preserved 17th-century Portuguese coastal fortress overlooking the Arabian Sea, housing a historic four-tier stone lighthouse.",
         "city": "Goa",
         "state": "Goa",
@@ -183,7 +183,7 @@ SAMPLE_PLACES = [
         "closing_time": "18:00"
     },
     {
-        "name": "Palolem Beach & Kayaking",
+        "name": "Palolem Beach",
         "description": "Crescent-shaped serene beach in South Goa framed by lush coconut groves, calm turquoise waters ideal for kayaking and peaceful strolls.",
         "city": "Goa",
         "state": "Goa",
@@ -275,8 +275,8 @@ SAMPLE_PLACES = [
         "closing_time": "17:00"
     },
     {
-        "name": "Jal Mahal (Water Palace)",
-        "description": "Poetic palace floating serenely in the middle of Man Sagar Lake, surrounded by the Aravalli hills, especially stunning when illuminated at twilight.",
+        "name": "Jal Mahal Viewpoint",
+        "description": "Public lakeside viewpoint for seeing Jal Mahal on Man Sagar Lake. The palace itself is generally viewed from the shore; access to the building is restricted.",
         "city": "Jaipur",
         "state": "Rajasthan",
         "address": "Amer Rd, Jal Mahal, Jaipur",
@@ -331,7 +331,7 @@ SAMPLE_PLACES = [
         "closing_time": "17:30"
     },
     {
-        "name": "Cubbon Park & Bamboo Groves",
+        "name": "Cubbon Park",
         "description": "300-acre green lung in the heart of Bengaluru, filled with walking paths, historic statues, century-old mahogany trees, and state library.",
         "city": "Bengaluru",
         "state": "Karnataka",
@@ -349,9 +349,27 @@ SAMPLE_PLACES = [
         "closing_time": "19:00"
     },
     {
-        "name": "Nandi Hills Sunrise Point",
-        "description": "Celebrated hilltop fortress 60 km from Bengaluru offering magical sunrise views above sea of clouds, summer retreat of Tipu Sultan.",
+        "name": "Lalbagh Botanical Garden",
+        "description": "Historic botanical garden in Bengaluru known for its glass house, plant collections, and walking paths. Check the garden's current entry schedule before visiting.",
         "city": "Bengaluru",
+        "state": "Karnataka",
+        "address": "Mavalli, Bengaluru, Karnataka",
+        "latitude": 12.9507,
+        "longitude": 77.5848,
+        "category": "Nature",
+        "estimated_duration_hours": 2.5,
+        "estimated_cost": 0.0,
+        "best_visiting_time": "Morning",
+        "suitable_interests": "Nature,Walking,Photography,Plants",
+        "rating": 4.6,
+        "image_url": None,
+        "opening_time": None,
+        "closing_time": None
+    },
+    {
+        "name": "Nandi Hills",
+        "description": "Celebrated hilltop fortress 60 km from Bengaluru offering magical sunrise views above sea of clouds, summer retreat of Tipu Sultan.",
+        "city": "Chikkaballapur",
         "state": "Karnataka",
         "address": "Chikkaballapur, Karnataka",
         "latitude": 13.3702,
@@ -369,12 +387,12 @@ SAMPLE_PLACES = [
 
     # --- MUNNAR ---
     {
-        "name": "Munnar Tea Plantations & Museum",
-        "description": "Endless rolling carpet of emerald tea gardens in the misty Western Ghats, with tea processing demonstrations and tasting sessions.",
+        "name": "Tata Tea Museum",
+        "description": "Tea museum at Nallathanni Estate in Munnar, presenting the region's tea-making history and exhibits. Check current opening details before visiting.",
         "city": "Munnar",
         "state": "Kerala",
         "address": "Nullatanni, Munnar",
-        "latitude": 10.0889,
+        "latitude": 10.0897,
         "longitude": 77.0595,
         "category": "Nature",
         "estimated_duration_hours": 2.5,

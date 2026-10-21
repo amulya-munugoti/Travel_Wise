@@ -24,6 +24,15 @@ KNOWN_CITY_COORDINATES: Dict[str, Tuple[float, float]] = {
     "chennai": (13.0827, 80.2707),
     "vizag": (17.6868, 83.2185),
     "visakhapatnam": (17.6868, 83.2185),
+    "nandi hills": (13.3702, 77.6835),
+    "chikkaballapur": (13.4355, 77.7315),
+}
+
+CITY_ALIASES = {
+    "bangalore": "bengaluru",
+    "north goa": "goa",
+    "south goa": "goa",
+    "nandi hills": "chikkaballapur",
 }
 
 
@@ -41,13 +50,35 @@ def haversine_distance_km(lat1: float, lon1: float, lat2: float, lon2: float) ->
     return round(r * c, 1)
 
 
-def get_city_coords(location_name: str) -> Tuple[float, float]:
-    cleaned = location_name.strip().lower()
-    for city, coords in KNOWN_CITY_COORDINATES.items():
-        if city in cleaned or cleaned in city:
-            return coords
-    # Default fallback to Hyderabad coordinates
-    return (17.3850, 78.4867)
+def normalize_city(location_name: str) -> str:
+    """Normalize common city aliases without guessing an unknown location."""
+    cleaned = location_name.split(",", 1)[0].strip().lower()
+    return CITY_ALIASES.get(cleaned, cleaned)
+
+
+def get_city_coords(location_name: str) -> Optional[Tuple[float, float]]:
+    raw_city = location_name.split(",", 1)[0].strip().lower()
+    return KNOWN_CITY_COORDINATES.get(raw_city) or KNOWN_CITY_COORDINATES.get(normalize_city(location_name))
+
+
+def get_destination_places(db: Session, destination: str) -> List[Place]:
+    """Return only catalogue places belonging to the requested destination."""
+    city = normalize_city(destination)
+    if not city or city == "all":
+        return db.query(Place).all()
+    return db.query(Place).filter(Place.city.ilike(city)).all()
+
+
+def supported_destinations(db: Session) -> List[str]:
+    return [row[0] for row in db.query(Place.city).distinct().order_by(Place.city).all()]
+
+
+def unsupported_destination_detail(db: Session, destination: str) -> str:
+    cities = ", ".join(supported_destinations(db))
+    return (
+        f"TravelWise currently has verified catalogue places for {cities}. "
+        f"It has no verified places for {destination.strip()!r}, so it cannot build an accurate itinerary there."
+    )
 
 
 def get_recommended_places(
@@ -58,21 +89,10 @@ def get_recommended_places(
     """
     Intelligently recommends places matching interests, proximity, budget, and trip style.
     """
-    start_lat, start_lon = get_city_coords(request.starting_location)
-    target_destination = request.destination.strip().lower() if request.destination else None
-
-    # Base query
-    query = db.query(Place)
-    
-    # If a specific destination was targeted (e.g. Goa, Hyderabad, Jaipur)
-    if target_destination and target_destination != "all":
-        # Check if matches a city name
-        query = query.filter(Place.city.ilike(f"%{target_destination}%"))
-
-    all_places = query.all()
+    start_coords = get_city_coords(request.starting_location)
+    all_places = get_destination_places(db, request.destination or "all")
     if not all_places:
-        # Fallback to all places
-        all_places = db.query(Place).all()
+        return []
 
     # User interest keywords
     user_interests = set(i.strip().lower() for i in request.interests if i.strip())
@@ -82,7 +102,11 @@ def get_recommended_places(
     scored_places = []
     for place in all_places:
         # Distance calculation
-        dist_km = haversine_distance_km(start_lat, start_lon, place.latitude, place.longitude)
+        dist_km = (
+            haversine_distance_km(*start_coords, place.latitude, place.longitude)
+            if start_coords
+            else None
+        )
         
         # Interest match score (0.0 to 1.0)
         place_interests = set(
@@ -99,7 +123,9 @@ def get_recommended_places(
         
         # Distance penalty/score: closer places or logical getaways within reach
         # For 2-day trips, destinations within 250km get higher weight
-        if dist_km <= 30:
+        if dist_km is None:
+            dist_score = 0.5
+        elif dist_km <= 30:
             dist_score = 1.0
         elif dist_km <= 150:
             dist_score = 0.85
