@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { ImageOff } from 'lucide-react';
 
 const PHOTO_SOURCES = {
-  'Charminar & Laad Bazaar': 'https://commons.wikimedia.org/wiki/File:Charminar-Pride_of_Hyderabad.jpg',
+  Charminar: 'https://commons.wikimedia.org/wiki/File:Charminar-Pride_of_Hyderabad.jpg',
+  'Mecca Masjid': 'https://commons.wikimedia.org/wiki/File:Mecca_Masjid_by_Night_View2.JPG',
   'Qutb Shahi Tombs': 'https://commons.wikimedia.org/wiki/File:Tomb_of_Muhammad_Quli_Qutb_Shah.jpg',
   'Baga Beach': 'https://commons.wikimedia.org/wiki/File:BagaBeachPanorana.jpg',
   'Palolem Beach': 'https://commons.wikimedia.org/wiki/File:Palolem_beach,_Goa_-_panoramio.jpg',
   'Hawa Mahal (Palace of Winds)': 'https://commons.wikimedia.org/wiki/File:Hawa_Mahal_front_view.JPG',
   'Jal Mahal Viewpoint': 'https://commons.wikimedia.org/wiki/File:Jal_Mahal_in_Man_Sagar_Lake.jpg',
   'Vidhana Soudha': 'https://commons.wikimedia.org/wiki/File:Vidhana_Soudha_close.jpg',
-  'Mattupetty Dam & Lake Boating': 'https://commons.wikimedia.org/wiki/File:Mattupetty_Dam.jpg',
+  'Chowmahalla Palace': 'https://commons.wikimedia.org/wiki/File:Chowmahalla_Palace_Front_View.jpg',
+  'Salar Jung Museum': 'https://commons.wikimedia.org/wiki/File:Salar_Jung_Museum.jpg',
+  'Mattupetty Dam': 'https://commons.wikimedia.org/wiki/File:Mattupetty_Dam.jpg',
   'Taj Mahal': 'https://commons.wikimedia.org/wiki/File:Taj_Mahal,_Agra,_India.jpg',
 };
 

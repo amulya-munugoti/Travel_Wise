@@ -24,6 +24,8 @@ def init_db():
         # Keep the bundled curated catalogue in sync on startup so existing
         # installations receive corrected names, locations, and new entries.
         legacy_names = {
+            "Charminar & Laad Bazaar": "Charminar",
+            "Hussain Sagar Lake & Buddha Statue": "Hussain Sagar Lake",
             "Hyderabadi Dum Biryani Trail": "Mecca Masjid",
             "Baga Beach & Water Sports": "Baga Beach",
             "Fort Aguada & Lighthouse": "Fort Aguada",
@@ -32,6 +34,7 @@ def init_db():
             "Cubbon Park & Bamboo Groves": "Cubbon Park",
             "Nandi Hills Sunrise Point": "Nandi Hills",
             "Munnar Tea Plantations & Museum": "Tata Tea Museum",
+            "Mattupetty Dam & Lake Boating": "Mattupetty Dam",
         }
         for place_data in SAMPLE_PLACES:
             current = db.query(Place).filter(Place.name == place_data["name"]).first()

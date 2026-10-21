@@ -1,7 +1,7 @@
 SAMPLE_PLACES = [
     # --- HYDERABAD ---
     {
-        "name": "Charminar & Laad Bazaar",
+        "name": "Charminar",
         "description": "The quintessential 1591 monument of Hyderabad with four grand minarets, surrounded by the vibrant pearl and bangle markets of Old City.",
         "city": "Hyderabad",
         "state": "Telangana",
@@ -37,7 +37,7 @@ SAMPLE_PLACES = [
         "closing_time": "17:30"
     },
     {
-        "name": "Hussain Sagar Lake & Buddha Statue",
+        "name": "Hussain Sagar Lake",
         "description": "Heart-shaped historic lake featuring the world's tallest monolithic Buddha statue standing in the center, with scenic boat cruises and waterfront promenade.",
         "city": "Hyderabad",
         "state": "Telangana",
@@ -143,6 +143,24 @@ SAMPLE_PLACES = [
         "image_url": None,
         "opening_time": "09:00",
         "closing_time": "17:00"
+    },
+    {
+        "name": "Qutb Shahi Tombs",
+        "description": "Historic royal necropolis near Golconda Fort, with domed tombs and landscaped grounds. Check current access and opening details before visiting.",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "address": "Ibrahim Bagh, Shaikpet, Hyderabad",
+        "latitude": 17.3947,
+        "longitude": 78.3964,
+        "category": "Historical",
+        "estimated_duration_hours": 2.0,
+        "estimated_cost": 0.0,
+        "best_visiting_time": "Morning",
+        "suitable_interests": "History,Architecture,Culture,Sightseeing",
+        "rating": 4.6,
+        "image_url": None,
+        "opening_time": None,
+        "closing_time": None
     },
 
     # --- GOA ---
@@ -405,7 +423,7 @@ SAMPLE_PLACES = [
         "closing_time": "17:00"
     },
     {
-        "name": "Mattupetty Dam & Lake Boating",
+        "name": "Mattupetty Dam",
         "description": "Picturesque concrete gravity dam surrounded by lush green hills, with speedboat rides and frequent glimpses of wild hill elephants.",
         "city": "Munnar",
         "state": "Kerala",
@@ -501,14 +519,17 @@ SAMPLE_PLACES = [
 # Only attach photos that were matched to the named attraction. The remaining
 # cards use PlaceImage's named fallback instead of unrelated stock imagery.
 VERIFIED_PLACE_IMAGES = {
-    "Charminar & Laad Bazaar": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Charminar-Pride_of_Hyderabad.jpg",
+    "Charminar": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Charminar-Pride_of_Hyderabad.jpg",
+    "Mecca Masjid": "https://upload.wikimedia.org/wikipedia/commons/6/65/Mecca_Masjid_by_Night_View2.JPG",
     "Qutb Shahi Tombs": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Tomb_of_Muhammad_Quli_Qutb_Shah.jpg",
     "Baga Beach": "https://upload.wikimedia.org/wikipedia/commons/0/0d/BagaBeachPanorana.jpg",
     "Palolem Beach": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Palolem_beach%2C_Goa_-_panoramio.jpg",
     "Hawa Mahal (Palace of Winds)": "https://upload.wikimedia.org/wikipedia/commons/8/82/Hawa_Mahal_front_view.JPG",
     "Jal Mahal Viewpoint": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Jal_Mahal_in_Man_Sagar_Lake.jpg",
     "Vidhana Soudha": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Vidhana_Soudha_close.jpg",
-    "Mattupetty Dam & Lake Boating": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Mattupetty_Dam.jpg",
+    "Chowmahalla Palace": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Chowmahalla_Palace_Front_View.jpg",
+    "Salar Jung Museum": "https://upload.wikimedia.org/wikipedia/commons/0/01/Salar_Jung_Museum.jpg",
+    "Mattupetty Dam": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Mattupetty_Dam.jpg",
     "Taj Mahal": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Taj_Mahal%2C_Agra%2C_India.jpg/1280px-Taj_Mahal%2C_Agra%2C_India.jpg",
 }
 
