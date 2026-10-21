@@ -42,9 +42,22 @@ export const Register = () => {
       navigate(from, { replace: true });
     } catch (err) {
       console.error('Registration error:', err);
-      setError(
-        err.response?.data?.detail || 'Registration failed. The email may already be in use.'
-      );
+      const detail = err.response?.data?.detail;
+      if (typeof detail === 'string') {
+        setError(detail);
+      } else if (Array.isArray(detail)) {
+        setError(detail.map((item) => item.msg).filter(Boolean).join(' '));
+      } else if (!err.response) {
+        setError('TravelWise could not reach the server. Refresh the page and try again.');
+      } else {
+        const status = err.response.status;
+        const serverMessage = err.response.data?.message;
+        setError(
+          typeof serverMessage === 'string'
+            ? `Registration failed (${status}): ${serverMessage}`
+            : `The server could not create this account (HTTP ${status}). Please try again or use Sign In if you already have an account.`
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -68,7 +81,7 @@ export const Register = () => {
         )}
 
         {error && (
-          <div className="flex items-center space-x-2 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm">
+          <div role="alert" aria-live="polite" className="flex items-center space-x-2 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
           </div>
