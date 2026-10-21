@@ -25,10 +25,12 @@ export const PlaceCard = ({ place, onSelect, isSelected = false, showSelectBtn =
           >
             {place.category}
           </span>
-          <div className="flex items-center space-x-1 px-2 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-amber-300 text-xs font-bold">
-            <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-            <span>{place.rating ? Number(place.rating).toFixed(1) : '4.5'}</span>
-          </div>
+          {place.provider === 'google_places' && place.rating != null && (
+            <div className="flex items-center space-x-1 px-2 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-amber-300 text-xs font-bold">
+              <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+              <span>{Number(place.rating).toFixed(1)}</span>
+            </div>
+          )}
         </div>
 
         {/* City tag bottom left */}

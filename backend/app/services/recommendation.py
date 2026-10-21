@@ -132,8 +132,9 @@ def get_recommended_places(
         else:
             dist_score = 0.50
 
-        # Quality / Rating score (e.g. 4.5 -> 0.9)
-        rating_score = (place.rating or 4.0) / 5.0
+        # The bundled catalogue has no live rating source. Use a neutral value
+        # so hand-entered demo ratings do not distort destination matching.
+        rating_score = 0.8
 
         # Weighted aggregate score
         total_score = (

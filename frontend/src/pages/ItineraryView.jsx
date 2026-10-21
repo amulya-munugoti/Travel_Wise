@@ -403,7 +403,7 @@ export const ItineraryView = () => {
                                   <MapPin className="w-3.5 h-3.5 text-slate-400" />
                                   <span>{item.place.address || item.place.city}</span>
                                 </span>
-                                {item.place.rating && (
+                                {item.place.provider === 'google_places' && item.place.rating != null && (
                                   <span className="font-semibold text-amber-600">
                                     ★ {Number(item.place.rating).toFixed(1)}
                                   </span>
