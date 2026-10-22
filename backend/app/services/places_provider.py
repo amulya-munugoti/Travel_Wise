@@ -103,7 +103,9 @@ def curated_nearby(db: Session, latitude: float, longitude: float, radius_km: fl
                 "place_id": f"curated:{place.id}", "provider": "curated",
                 "name": place.name, "category": place.category, "address": place.address, "city": place.city,
                 "latitude": place.latitude, "longitude": place.longitude, "distance_km": round(distance, 2),
-                "rating": place.rating, "image_url": None, "description": place.description,
+                # Reuse the catalogue photo in offline nearby results instead of
+                # forcing every curated result to render the no-photo state.
+                "rating": place.rating, "image_url": place.image_url, "description": place.description,
                 "estimated_cost": place.estimated_cost,
             })
     return sorted(results, key=lambda item: item["distance_km"])[:limit]
