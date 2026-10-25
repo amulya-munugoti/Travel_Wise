@@ -243,5 +243,3 @@ For immediate testing, you can register a new account or click the **"Fill Demo 
 
 
 ALL RIGHTS RESERVED TO AMULYA MUNNUGOTI
-
-
