@@ -242,6 +242,4 @@ For immediate testing, you can register a new account or click the **"Fill Demo 
    AWS Project
 
 
-ALL RIGHTS RESERVED TO AMULYA MUNNUGOTI
-
-
+ALL RIGHTS RESERVED By AMULYA MUNNUGOTI
