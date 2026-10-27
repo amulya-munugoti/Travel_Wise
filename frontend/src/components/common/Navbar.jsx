@@ -13,9 +13,10 @@ export default function Navbar() {
 
   const links = [
     { label: 'Home', to: '/' },
+    { label: 'Explore places', to: '/places', icon: MapPin },
+    { label: 'Plan a trip', to: '/create-trip', icon: Compass },
     ...(isAuthenticated
       ? [
-          { label: 'Explore places', to: '/places', icon: MapPin },
           { label: 'My trips', to: '/saved-trips', icon: Bookmark },
         ]
       : []),
@@ -60,11 +61,6 @@ export default function Navbar() {
               </Link>
             );
           })}
-          {isAuthenticated && (
-            <Link to="/create-trip" className="ml-2 inline-flex items-center rounded-full bg-[#24513d] px-5 py-2.5 text-[13px] font-bold text-white shadow-sm transition hover:bg-[#193f2f] hover:shadow-md">
-              Plan a trip
-            </Link>
-          )}
         </nav>}
 
         {!isAuthPage && <div className="hidden items-center gap-3 md:flex">
@@ -122,9 +118,6 @@ export default function Navbar() {
             {isAuthenticated ? (
               <div className="border-t border-slate-100 pt-2">
                 <p className="px-3 py-2 text-xs text-slate-500">{user?.email}</p>
-                <Link to="/create-trip" onClick={closeMenus} className="mb-1 flex items-center justify-center rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-bold text-white">
-                  Plan a trip
-                </Link>
                 <Link to="/profile" onClick={closeMenus} className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50">
                   <UserRound className="h-4 w-4" /> Travel preferences
                 </Link>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
+import AuthLayout from '../components/common/AuthLayout';
 
 export const Login = () => {
   const { login } = useAuth();
@@ -45,14 +46,15 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-[#f5f7f3] px-4 py-12 sm:px-6 lg:px-8">
-      <div className="w-full max-w-[440px] rounded-2xl border border-[#e3e8e1] bg-white p-7 shadow-[0_18px_55px_rgba(31,55,40,.07)] sm:p-10">
+    <AuthLayout>
         <div>
-          <p className="text-xs font-bold uppercase tracking-[.16em] text-emerald-800">TravelWise</p>
-          <h1 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-slate-950">Sign in</h1>
+          <p className="text-xs font-bold uppercase tracking-[.16em] text-[#628167]">Welcome back</p>
+          <h1 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-[#1d3529]">Sign in to TravelWise</h1>
           <p className="mt-2 text-sm leading-6 text-slate-600">
-            Access your trips, itineraries and travel preferences.
+            Pick up where you left off and keep your next getaway moving.
           </p>
+        </div>
+        <div className="mt-6">
           <button
             type="button"
             onClick={() => {
@@ -140,8 +142,7 @@ export const Login = () => {
             Create an account
           </Link>
         </div>
-      </div>
-    </div>
+    </AuthLayout>
   );
 };
 

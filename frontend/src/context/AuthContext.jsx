@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { authApi } from '../services/api';
 
 const AuthContext = createContext(null);
@@ -8,15 +8,23 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem('travelwise_token'));
   const [loading, setLoading] = useState(true);
 
+  const logout = useCallback(() => {
+    localStorage.removeItem('travelwise_token');
+    localStorage.removeItem('travelwise_user');
+    setToken(null);
+    setUser(null);
+  }, []);
+
   useEffect(() => {
     const initializeAuth = async () => {
-      const savedToken = localStorage.getItem('travelwise_token');
-      if (savedToken) {
+      if (localStorage.getItem('travelwise_token')) {
         try {
           const res = await authApi.getMe();
           setUser(res.data);
         } catch (err) {
-          console.error('Session expired or invalid token:', err);
+          if (err.response?.status !== 401) {
+            console.error('Could not restore the current session:', err);
+          }
           logout();
         }
       }
@@ -24,7 +32,12 @@ export const AuthProvider = ({ children }) => {
     };
 
     initializeAuth();
-  }, []);
+  }, [logout]);
+
+  useEffect(() => {
+    window.addEventListener('travelwise:unauthorized', logout);
+    return () => window.removeEventListener('travelwise:unauthorized', logout);
+  }, [logout]);
 
   const login = async (email, password) => {
     const res = await authApi.login({ email, password });
@@ -42,13 +55,6 @@ export const AuthProvider = ({ children }) => {
     setToken(access_token);
     setUser(newUser);
     return newUser;
-  };
-
-  const logout = () => {
-    localStorage.removeItem('travelwise_token');
-    localStorage.removeItem('travelwise_user');
-    setToken(null);
-    setUser(null);
   };
 
   const updateProfile = async (data) => {

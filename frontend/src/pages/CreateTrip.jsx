@@ -12,8 +12,6 @@ import {
   ArrowRight, 
   ArrowLeft, 
   Check, 
-  Clock, 
-  Heart, 
   AlertCircle,
   Coffee,
   Zap,

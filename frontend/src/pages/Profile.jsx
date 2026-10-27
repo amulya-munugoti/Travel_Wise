@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { User, MapPin, IndianRupee, Compass, Save, CheckCircle2, AlertCircle } from 'lucide-react';
-import { formatCurrency } from '../utils/formatters';
+import { IndianRupee, Save, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export const Profile = () => {
   const { user, updateProfile } = useAuth();

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { 
   tripsApi, 
   itineraryApi, 
@@ -11,11 +11,8 @@ import {
   Calendar, 
   Clock, 
   MapPin, 
-  Navigation, 
   IndianRupee, 
   CheckCircle, 
-  Circle, 
-  Sparkles, 
   Printer, 
   Trash2, 
   Plus, 
@@ -24,17 +21,13 @@ import {
   Luggage, 
   ArrowLeft, 
   RotateCw,
-  Utensils,
   Car,
-  Compass,
   Check
 } from 'lucide-react';
 import { formatCurrency, formatDuration, formatDistance, getCategoryBadgeStyle } from '../utils/formatters';
 
 export const ItineraryView = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-
   const [trip, setTrip] = useState(null);
   const [itinerary, setItinerary] = useState(null);
   const [budget, setBudget] = useState(null);
@@ -119,7 +112,7 @@ export const ItineraryView = () => {
     if (!newItemText.trim()) return;
 
     try {
-      const res = await checklistApi.addItem(id, {
+      await checklistApi.addItem(id, {
         item: newItemText.trim(),
         category: newItemCategory,
         is_completed: false,
@@ -198,6 +191,13 @@ export const ItineraryView = () => {
             </button>
           </div>
         </div>
+
+        {actionError && (
+          <div role="alert" className="flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+            <span>{actionError}</span>
+          </div>
+        )}
 
         {/* Trip Overview Hero Header */}
         <div className="rounded-3xl bg-white border border-slate-200/80 p-6 sm:p-8 shadow-sm">

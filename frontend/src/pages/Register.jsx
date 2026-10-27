@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, User, ArrowRight, AlertCircle } from 'lucide-react';
+import AuthLayout from '../components/common/AuthLayout';
 
 export const Register = () => {
   const { register } = useAuth();
@@ -64,13 +65,12 @@ export const Register = () => {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-[#f5f7f3] px-4 py-12 sm:px-6 lg:px-8">
-      <div className="w-full max-w-[480px] rounded-2xl border border-[#e3e8e1] bg-white p-7 shadow-[0_18px_55px_rgba(31,55,40,.07)] sm:p-10">
+    <AuthLayout>
         <div>
-          <p className="text-xs font-bold uppercase tracking-[.16em] text-emerald-800">TravelWise</p>
-          <h1 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-slate-950">Create your account</h1>
+          <p className="text-xs font-bold uppercase tracking-[.16em] text-[#628167]">Your next trip starts here</p>
+          <h1 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-[#1d3529]">Create your account</h1>
           <p className="mt-2 text-sm leading-6 text-slate-600">
-            Set up your account to start planning and save your trips.
+            Save your plans, preferences and the places you want to see.
           </p>
         </div>
 
@@ -87,7 +87,7 @@ export const Register = () => {
           </div>
         )}
 
-        <form className="mt-7 space-y-4" onSubmit={handleSubmit}>
+        <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           <div>
             <label className="mb-1.5 block text-sm font-semibold text-slate-800">
               Full Name
@@ -185,8 +185,7 @@ export const Register = () => {
             Sign In
           </Link>
         </div>
-      </div>
-    </div>
+    </AuthLayout>
   );
 };
 

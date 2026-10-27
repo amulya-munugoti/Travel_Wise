@@ -10,8 +10,7 @@ import {
   ArrowRight, 
   IndianRupee, 
   Users, 
-  Trash2, 
-  Clock,
+  Trash2,
   Sparkles
 } from 'lucide-react';
 import { formatCurrency } from '../utils/formatters';
@@ -20,14 +19,16 @@ export const SavedTrips = () => {
   const navigate = useNavigate();
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
 
   const fetchTrips = async () => {
     try {
-      setLoading(true);
+      setLoadError('');
       const res = await tripsApi.getTrips();
       setTrips(res.data);
     } catch (err) {
       console.error('Failed to fetch saved trips:', err);
+      setLoadError('Your trips could not be loaded. Check your connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -75,7 +76,14 @@ export const SavedTrips = () => {
           </Link>
         </div>
 
-        {trips.length === 0 ? (
+        {loadError ? (
+          <div role="alert" className="rounded-2xl border border-rose-200 bg-rose-50 p-6 text-sm text-rose-800">
+            <p className="font-semibold">{loadError}</p>
+            <button type="button" onClick={() => { setLoading(true); fetchTrips(); }} className="mt-3 rounded-lg bg-white px-4 py-2 font-bold text-rose-900 ring-1 ring-rose-200 hover:bg-rose-100">
+              Try again
+            </button>
+          </div>
+        ) : trips.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
             <Compass className="w-12 h-12 text-slate-300 mx-auto mb-3" />
             <h3 className="text-lg font-bold text-slate-800">No saved trips</h3>

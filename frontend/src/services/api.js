@@ -27,10 +27,16 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      // If token expired, clear local storage
+    const requestUrl = error.config?.url || '';
+    if (
+      error.response?.status === 401 &&
+      localStorage.getItem('travelwise_token') &&
+      !requestUrl.includes('/auth/login') &&
+      !requestUrl.includes('/auth/register')
+    ) {
       localStorage.removeItem('travelwise_token');
       localStorage.removeItem('travelwise_user');
+      window.dispatchEvent(new Event('travelwise:unauthorized'));
     }
     return Promise.reject(error);
   }
