@@ -76,6 +76,7 @@ export const CreateTrip = () => {
   const [selectedInterests, setSelectedInterests] = useState(['Nature', 'Food', 'Sightseeing']);
   const [destinationPlaces, setDestinationPlaces] = useState([]);
   const [selectedPlaceNames, setSelectedPlaceNames] = useState([]);
+  const [hasEditedPlaces, setHasEditedPlaces] = useState(false);
   const selectedPlaceIds = searchParams.get('selected') || '';
 
   const getSelectedPlaceIds = () => {
@@ -84,7 +85,7 @@ export const CreateTrip = () => {
       .map((name) => destinationPlaces.find((place) => place.name === name)?.id)
       .filter((id) => Number.isInteger(id))
       .map(String);
-    const selectedIds = destinationPlaces.length ? idsFromForm : idsFromUrl;
+    const selectedIds = hasEditedPlaces ? idsFromForm : idsFromUrl;
     return [...new Set(selectedIds)].join(',');
   };
 
@@ -128,6 +129,7 @@ export const CreateTrip = () => {
 
   // Handle specific attraction toggle
   const togglePlace = (place) => {
+    setHasEditedPlaces(true);
     if (selectedPlaceNames.includes(place.name)) {
       setSelectedPlaceNames(selectedPlaceNames.filter((name) => name !== place.name));
     } else {
