@@ -7,32 +7,44 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem('travelwise_token'));
   const [loading, setLoading] = useState(true);
+  const [authError, setAuthError] = useState('');
 
   const logout = useCallback(() => {
     localStorage.removeItem('travelwise_token');
     localStorage.removeItem('travelwise_user');
     setToken(null);
     setUser(null);
+    setAuthError('');
   }, []);
 
-  useEffect(() => {
-    const initializeAuth = async () => {
-      if (localStorage.getItem('travelwise_token')) {
-        try {
-          const res = await authApi.getMe();
-          setUser(res.data);
-        } catch (err) {
-          if (err.response?.status !== 401) {
-            console.error('Could not restore the current session:', err);
-          }
-          logout();
-        }
-      }
+  const refreshSession = useCallback(async () => {
+    setLoading(true);
+    setAuthError('');
+    if (!localStorage.getItem('travelwise_token')) {
+      setToken(null);
+      setUser(null);
       setLoading(false);
-    };
+      return;
+    }
 
-    initializeAuth();
+    try {
+      const res = await authApi.getMe();
+      setUser(res.data);
+    } catch (err) {
+      if (err.response?.status === 401) {
+        logout();
+      } else {
+        console.error('Could not restore the current session:', err);
+        setAuthError('TravelWise could not verify your session. Check your connection and try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
   }, [logout]);
+
+  useEffect(() => {
+    refreshSession();
+  }, [refreshSession]);
 
   useEffect(() => {
     window.addEventListener('travelwise:unauthorized', logout);
@@ -45,6 +57,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('travelwise_token', access_token);
     setToken(access_token);
     setUser(loggedUser);
+    setAuthError('');
     return loggedUser;
   };
 
@@ -54,6 +67,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('travelwise_token', access_token);
     setToken(access_token);
     setUser(newUser);
+    setAuthError('');
     return newUser;
   };
 
@@ -70,9 +84,11 @@ export const AuthProvider = ({ children }) => {
         token,
         isAuthenticated: !!user,
         loading,
+        authError,
         login,
         register,
         logout,
+        refreshSession,
         updateProfile,
       }}
     >

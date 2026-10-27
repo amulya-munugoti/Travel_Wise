@@ -9,6 +9,7 @@ from app.schemas.place import RecommendationRequest
 from app.services.recommendation import (
     get_recommended_places,
     haversine_distance_km,
+    get_destination_places,
     unsupported_destination_detail,
 )
 
@@ -81,9 +82,14 @@ def generate_trip_itinerary(db: Session, trip: Trip) -> List[ItineraryDay]:
     places_map = {p.id: p for p in db.query(Place).filter(Place.id.in_(place_ids)).all()}
     candidate_places = [places_map[pid] for pid in place_ids if pid in places_map]
     selected_ids = {int(value) for value in (trip.selected_place_ids or "").split(",") if value.strip().isdigit()}
-    selected_places = [place for place in candidate_places if place.id in selected_ids]
+    destination_places = get_destination_places(db, trip.destination)
+    selected_places = [place for place in destination_places if place.id in selected_ids]
     if selected_places:
-        candidate_places = selected_places + [place for place in candidate_places if place.id not in selected_ids]
+        recommended_by_id = {place.id: place for place in candidate_places}
+        candidate_places = selected_places + [
+            place for place in recommended_by_id.values()
+            if place.id not in selected_ids
+        ]
 
     if not candidate_places:
         raise HTTPException(status_code=422, detail=unsupported_destination_detail(db, trip.destination))

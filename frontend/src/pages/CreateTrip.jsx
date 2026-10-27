@@ -78,6 +78,16 @@ export const CreateTrip = () => {
   const [selectedPlaceNames, setSelectedPlaceNames] = useState([]);
   const selectedPlaceIds = searchParams.get('selected') || '';
 
+  const getSelectedPlaceIds = () => {
+    const idsFromUrl = selectedPlaceIds.split(',').filter((id) => /^\d+$/.test(id));
+    const idsFromForm = selectedPlaceNames
+      .map((name) => destinationPlaces.find((place) => place.name === name)?.id)
+      .filter((id) => Number.isInteger(id))
+      .map(String);
+    const selectedIds = destinationPlaces.length ? idsFromForm : idsFromUrl;
+    return [...new Set(selectedIds)].join(',');
+  };
+
   // Auto-sync user's home city when user loads
   useEffect(() => {
     if (user?.home_location && startingLocation === 'Hyderabad') {
@@ -147,7 +157,7 @@ export const CreateTrip = () => {
         budget: Number(budget),
         travel_style: travelStyle,
         interests: selectedInterests.join(','),
-        selected_place_ids: selectedPlaceIds,
+        selected_place_ids: getSelectedPlaceIds(),
         auto_generate: true,
       };
 
