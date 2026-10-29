@@ -13,10 +13,10 @@ export default function Navbar() {
 
   const links = [
     { label: 'Home', to: '/' },
-    { label: 'Explore places', to: '/places', icon: MapPin },
-    { label: 'Plan a trip', to: '/create-trip', icon: Compass },
     ...(isAuthenticated
       ? [
+          { label: 'Explore places', to: '/places', icon: MapPin },
+          { label: 'Plan a trip', to: '/create-trip', icon: Compass },
           { label: 'My trips', to: '/saved-trips', icon: Bookmark },
         ]
       : []),

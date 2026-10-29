@@ -26,14 +26,22 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route
                 path="/places"
-                element={<RecommendedPlaces />}
+                element={
+                  <ProtectedRoute>
+                    <RecommendedPlaces />
+                  </ProtectedRoute>
+                }
               />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
 
               <Route
                 path="/create-trip"
-                element={<CreateTrip />}
+                element={
+                  <ProtectedRoute>
+                    <CreateTrip />
+                  </ProtectedRoute>
+                }
               />
               <Route path="/dashboard" element={<Navigate to="/saved-trips" replace />} />
               <Route
