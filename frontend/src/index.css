@@ -64,24 +64,51 @@
 }
 
 @keyframes card-enter {
-  from { opacity: 0; transform: translateY(24px) scale(.985); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(42px) scale(.96); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
-.hero-photo { animation: hero-scale 24s ease-in-out infinite alternate; }
-.hero-copy { animation: rise-in .9s .15s cubic-bezier(.2,.7,.2,1) both; }
-.hero-trip-card { animation: slow-float 7s ease-in-out infinite; }
-.marquee-track { animation: ticker 42s linear infinite; }
+@keyframes orbit-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes globe-beat {
+  0%, 100% { transform: scale(.96); filter: brightness(.88); }
+  50% { transform: scale(1.06); filter: brightness(1.2); }
+}
+
+@keyframes card-rock {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-14px) rotate(-1.2deg); }
+}
+
+@keyframes float-up {
+  from { opacity: 0; transform: translateY(35px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-photo { animation: hero-scale 14s ease-in-out infinite alternate; }
+.hero-copy { position: relative; z-index: 2; animation: rise-in .9s .15s cubic-bezier(.2,.7,.2,1) both; }
+.hero-trip-card { animation: card-rock 3.8s ease-in-out infinite; }
+.marquee-track { animation: ticker 19s linear infinite; }
 .marquee-band:hover .marquee-track { animation-play-state: paused; }
-.section-reveal { animation: rise-in .7s .15s cubic-bezier(.2,.7,.2,1) both; }
-.destination-card { animation: card-enter .75s cubic-bezier(.2,.7,.2,1) both; }
-.destination-card-2 { animation-delay: .12s; }
-.destination-card-3 { animation-delay: .24s; }
+.scroll-reveal { opacity: 0; transform: translateY(42px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+.scroll-reveal.in-view { opacity: 1; transform: translateY(0); }
+.scroll-reveal .destination-card { opacity: 0; transform: translateY(30px) scale(.97); }
+.scroll-reveal.in-view .destination-card { animation: card-enter .85s cubic-bezier(.2,.7,.2,1) both; }
+.scroll-reveal.in-view .destination-card-2 { animation-delay: .13s; }
+.scroll-reveal.in-view .destination-card-3 { animation-delay: .26s; }
 .trip-day-row { animation: rise-in .55s both; }
 .trip-day-row:nth-child(2) { animation-delay: .12s; }
 .trip-day-row:nth-child(3) { animation-delay: .24s; }
-.auth-photo { animation: hero-scale 28s ease-in-out infinite alternate; }
-.auth-floating-note { animation: slow-float 6s ease-in-out infinite; }
+.auth-photo { animation: hero-scale 15s ease-in-out infinite alternate; }
+.auth-floating-note { animation: slow-float 3.6s ease-in-out infinite; }
+.orbit-ring-one { animation: orbit-spin 26s linear infinite; }
+.orbit-ring-two { animation: orbit-spin 9s linear infinite reverse; }
+.orbit-plane { animation: orbit-spin 7s linear infinite; }
+.orbit-globe { animation: globe-beat 3.5s ease-in-out infinite; }
+.journey-orbit { animation: float-up 1.2s .35s cubic-bezier(.2,.7,.2,1) both; }
+.itinerary-pop { animation: card-rock 4.1s .35s ease-in-out infinite; }
 
 .motion-rise { animation: rise-in .72s cubic-bezier(.2,.7,.2,1) both; }
 .animate-map-float { animation: map-drift 8s ease-in-out infinite; }
@@ -97,7 +124,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .motion-rise, .animate-map-float, .animate-note-float, .route-line, .auth-route, .auth-form, .poster-copy, .poster-stamp, .poster-glow::after,
-  .hero-photo, .hero-copy, .hero-trip-card, .marquee-track, .section-reveal, .destination-card, .trip-day-row, .auth-photo, .auth-floating-note { animation: none !important; }
+  .hero-photo, .hero-copy, .hero-trip-card, .marquee-track, .section-reveal, .destination-card, .trip-day-row, .auth-photo, .auth-floating-note,
+  .orbit-ring-one, .orbit-ring-two, .orbit-plane, .orbit-globe, .journey-orbit, .itinerary-pop { animation: none !important; }
+  .scroll-reveal, .scroll-reveal .destination-card { opacity: 1 !important; transform: none !important; filter: none !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {

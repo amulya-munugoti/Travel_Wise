@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowDown, ArrowRight, ArrowUpRight, Bookmark, CalendarDays, Compass, MapPin, Sparkles } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, Bookmark, CalendarDays, Compass, MapPin, Plane, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const destinations = [
@@ -36,6 +36,43 @@ const promises = [
   { icon: Bookmark, title: 'Keep the good bits', copy: 'Save the stops, small details and plans you’ll want to find again.' },
 ];
 
+function useScrollReveals() {
+  useEffect(() => {
+    const targets = document.querySelectorAll('.scroll-reveal');
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach((target) => target.classList.add('in-view'));
+      return undefined;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -45px 0px' });
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
+}
+
+function JourneyOrbit() {
+  return (
+    <div className="journey-orbit pointer-events-none absolute right-[-70px] top-[12%] z-[1] grid h-[250px] w-[250px] place-items-center sm:right-[2%] sm:top-[10%] sm:h-[340px] sm:w-[340px] lg:right-[7%] lg:top-[12%] lg:h-[410px] lg:w-[410px]" aria-hidden="true">
+      <div className="orbit-ring orbit-ring-one absolute inset-[8%] rounded-full border border-white/25" />
+      <div className="orbit-ring orbit-ring-two absolute inset-[18%] rounded-full border border-dashed border-[#f1c28c]/65" />
+      <div className="orbit-plane absolute inset-[18%] rounded-full"><span className="grid h-9 w-9 place-items-center rounded-full bg-[#f0bd80] text-[#183d37] shadow-[0_0_28px_rgba(240,189,128,.55)]"><Plane className="h-4 w-4 -rotate-12" /></span></div>
+      <div className="orbit-globe relative grid h-[112px] w-[112px] place-items-center overflow-hidden rounded-full border border-white/35 bg-[radial-gradient(circle_at_34%_28%,rgba(255,255,255,.4),transparent_23%),radial-gradient(circle_at_70%_78%,#24564d,#153733_70%)] shadow-[0_0_90px_rgba(234,184,123,.26)] sm:h-[150px] sm:w-[150px] lg:h-[176px] lg:w-[176px]">
+        <span className="absolute inset-x-[-30%] top-[35%] h-[38%] rotate-[-28deg] rounded-[50%] border border-white/30" />
+        <span className="absolute inset-y-[-20%] left-[31%] w-[38%] rotate-[22deg] rounded-[50%] border border-white/25" />
+        <Compass className="relative h-8 w-8 text-[#f1c28c] sm:h-10 sm:w-10" />
+      </div>
+      <span className="absolute left-[3%] top-[30%] rounded-full border border-white/30 bg-[#183b37]/65 px-3 py-2 text-[8px] font-extrabold uppercase tracking-[.17em] text-white backdrop-blur-md sm:left-[-1%]">Route found · 03 days</span>
+      <span className="absolute bottom-[16%] right-[2%] rounded-full border border-white/25 bg-white/10 px-3 py-2 text-[8px] font-extrabold uppercase tracking-[.17em] text-[#f4cc9b] backdrop-blur-md">12° 21' N · 75° 44' E</span>
+    </div>
+  );
+}
+
 function PhotoCard({ destination, index }) {
   return (
     <article className={`destination-card group destination-card-${index + 1} relative min-h-[420px] overflow-hidden bg-[#24423b] sm:min-h-[500px]`}>
@@ -55,6 +92,7 @@ function PhotoCard({ destination, index }) {
 }
 
 function WelcomeHome() {
+  useScrollReveals();
   return (
     <div className="overflow-hidden bg-[#f3efe5] text-[#213b34]">
       <section className="photo-hero relative flex min-h-[690px] items-end overflow-hidden bg-[#173a35] sm:min-h-[760px] lg:min-h-[calc(100vh-68px)]">
@@ -62,6 +100,7 @@ function WelcomeHome() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,30,26,.78)_0%,rgba(13,34,29,.44)_49%,rgba(11,28,26,.06)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(11,28,25,.55)_0%,transparent_45%)]" />
         <div className="absolute inset-0 bg-[#17352e]/10 mix-blend-multiply" />
+        <JourneyOrbit />
 
         <div className="relative mx-auto grid w-full max-w-[1500px] items-end gap-10 px-5 pb-12 pt-20 sm:px-10 sm:pb-16 lg:grid-cols-[1fr_350px] lg:px-16 lg:pb-[6.5rem] xl:px-24">
           <div className="hero-copy max-w-[790px] text-white">
@@ -76,7 +115,7 @@ function WelcomeHome() {
             </div>
           </div>
 
-          <aside className="hero-trip-card relative hidden max-w-[330px] justify-self-end border border-white/25 bg-[#f7f1e6]/95 p-5 text-[#233c35] shadow-[0_24px_70px_rgba(9,26,22,.28)] backdrop-blur-lg lg:block xl:mr-5">
+          <aside className="hero-trip-card relative z-[2] mt-5 max-w-[330px] justify-self-end border border-white/25 bg-[#f7f1e6]/95 p-5 text-[#233c35] shadow-[0_24px_70px_rgba(9,26,22,.28)] backdrop-blur-lg sm:mt-7 lg:mt-0 xl:mr-5">
             <div className="flex items-center justify-between border-b border-[#ded7c8] pb-3">
               <span className="text-[9px] font-extrabold uppercase tracking-[.2em] text-[#b75f43]">A weekend note / 014</span><Sparkles className="h-4 w-4 text-[#c56747]" />
             </div>
@@ -102,18 +141,18 @@ function WelcomeHome() {
       </div>
 
       <section id="get-inspired" className="mx-auto max-w-[1500px] px-5 py-16 sm:px-10 sm:py-24 lg:px-16 xl:px-24">
-        <div className="mb-9 flex flex-col justify-between gap-5 sm:mb-12 sm:flex-row sm:items-end">
+        <div className="scroll-reveal mb-9 flex flex-col justify-between gap-5 sm:mb-12 sm:flex-row sm:items-end">
           <div className="section-reveal max-w-xl"><p className="text-[10px] font-extrabold uppercase tracking-[.2em] text-[#bd6244]">Three days can change the week</p><h2 className="mt-4 font-heading text-4xl font-medium leading-[.96] tracking-[-.065em] text-[#203a34] sm:text-6xl">Pick your kind<br />of <span className="font-serif italic text-[#c66a4a]">away.</span></h2></div>
           <p className="max-w-xs pb-1 text-sm leading-6 text-[#738078]">A little inspiration for wherever your mind wanders first.</p>
         </div>
-        <div className="grid gap-4 md:grid-cols-3 md:gap-5">{destinations.map((destination, index) => <PhotoCard key={destination.name} destination={destination} index={index} />)}</div>
+        <div className="scroll-reveal grid gap-4 md:grid-cols-3 md:gap-5">{destinations.map((destination, index) => <PhotoCard key={destination.name} destination={destination} index={index} />)}</div>
       </section>
 
       <section className="relative overflow-hidden bg-[#183b37] text-[#f7f2e8]">
         <div className="absolute -right-40 -top-60 h-[520px] w-[520px] rounded-full border border-white/[.08]" /><div className="absolute -right-24 -top-44 h-[360px] w-[360px] rounded-full border border-white/[.08]" />
-        <div className="relative mx-auto grid max-w-[1500px] gap-12 px-5 py-16 sm:px-10 sm:py-20 lg:grid-cols-[.95fr_1.05fr] lg:items-center lg:px-16 xl:px-24">
+        <div className="scroll-reveal relative mx-auto grid max-w-[1500px] gap-12 px-5 py-16 sm:px-10 sm:py-20 lg:grid-cols-[.95fr_1.05fr] lg:items-center lg:px-16 xl:px-24">
           <div><p className="flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[.2em] text-[#edbd80]"><Compass className="h-4 w-4" /> A better kind of travel planning</p><h2 className="mt-5 max-w-lg font-heading text-4xl font-medium leading-[.98] tracking-[-.06em] sm:text-6xl">Less itinerary.<br /><span className="font-serif font-normal italic text-[#edbd80]">More in it.</span></h2><p className="mt-5 max-w-md text-sm leading-7 text-white/65">A good getaway doesn’t need a spreadsheet. Just a few places you’re excited about and enough room for the unexpected.</p><Link to="/register" className="group mt-8 inline-flex min-h-[52px] items-center gap-4 bg-[#d06d4e] px-5 text-xs font-extrabold uppercase tracking-[.12em] text-white transition hover:bg-[#df7957]">Start making yours <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></Link></div>
-          <div className="relative mx-auto w-full max-w-[560px]">
+          <div className="itinerary-pop relative mx-auto w-full max-w-[560px]">
             <div className="overflow-hidden border border-white/15 bg-[#213f39] p-5 shadow-2xl sm:p-7">
               <div className="flex items-center justify-between border-b border-white/15 pb-4"><div><p className="text-[9px] font-extrabold uppercase tracking-[.2em] text-[#edbd80]">Your three-day feeling</p><h3 className="mt-1 font-heading text-xl font-semibold">A long weekend in Coorg</h3></div><span className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-[#edbd80]"><CalendarDays className="h-4 w-4" /></span></div>
               <div className="mt-5 space-y-4">
@@ -126,7 +165,7 @@ function WelcomeHome() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-[1500px] flex-col items-center gap-5 px-5 py-14 text-center sm:px-10 sm:py-20">
+      <section className="scroll-reveal mx-auto flex max-w-[1500px] flex-col items-center gap-5 px-5 py-14 text-center sm:px-10 sm:py-20">
         <p className="text-[10px] font-extrabold uppercase tracking-[.2em] text-[#bd6244]">The next story is yours</p><h2 className="font-heading text-4xl font-medium tracking-[-.06em] text-[#203a34] sm:text-5xl">Where will you disappear to?</h2><div className="mt-2 flex flex-col gap-3 sm:flex-row"><Link to="/register" className="inline-flex min-h-[52px] items-center justify-center gap-3 bg-[#cf6546] px-6 text-xs font-extrabold uppercase tracking-[.12em] text-white transition hover:bg-[#b95337]">Let’s find out <ArrowRight className="h-4 w-4" /></Link><Link to="/login" className="inline-flex min-h-[52px] items-center justify-center px-6 text-xs font-extrabold uppercase tracking-[.12em] text-[#415d51] hover:bg-[#e8e3d7]">Sign in</Link></div>
       </section>
     </div>
