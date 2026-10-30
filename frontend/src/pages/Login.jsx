@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
+import { Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff, Sparkles } from 'lucide-react';
 import AuthLayout from '../components/common/AuthLayout';
 
 export const Login = () => {
@@ -13,6 +13,7 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const from = location.state?.from
     ? typeof location.state.from === 'string'
@@ -46,15 +47,13 @@ export const Login = () => {
   };
 
   return (
-    <AuthLayout>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[.16em] text-[#628167]">Welcome back</p>
-          <h1 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-[#1d3529]">Sign in to TravelWise</h1>
-          <p className="mt-2 text-sm leading-6 text-slate-600">
-            Pick up where you left off and keep your next getaway moving.
-          </p>
+    <AuthLayout mode="login">
+        <div className="mb-8">
+          <p className="flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[.2em] text-[#bd6043]"><span className="h-px w-6 bg-[#bd6043]" /> Back to the good part</p>
+          <h1 className="mt-4 font-heading text-4xl font-medium leading-[1.02] tracking-[-.055em] text-[#203a34] sm:text-[2.8rem]">Welcome<br className="hidden sm:block" /> back, <span className="font-serif font-normal italic text-[#c76345]">traveler.</span></h1>
+          <p className="mt-4 max-w-sm text-sm leading-6 text-[#778078]">Sign in and pick up right where your next little escape begins.</p>
         </div>
-        <div className="mt-6">
+        <div className="mb-5 rounded-xl border border-dashed border-[#d8d1c2] bg-[#f5f1e8] px-4 py-3">
           <button
             type="button"
             onClick={() => {
@@ -62,20 +61,20 @@ export const Login = () => {
               setPassword('TravelWise@123');
               setError('');
             }}
-            className="mt-3 text-sm font-semibold text-emerald-800 hover:text-emerald-950"
+            className="flex w-full items-center justify-between gap-3 text-left"
           >
-            Fill demo credentials
+            <span className="flex items-center gap-2.5"><span className="grid h-8 w-8 place-items-center rounded-lg bg-[#e9e3d5] text-[#c36547]"><Sparkles className="h-4 w-4" /></span><span><span className="block text-xs font-bold text-[#314c40]">Just looking around?</span><span className="mt-0.5 block text-[10px] text-[#8a8a7d]">Fill the demo login for a quick visit</span></span></span><ArrowRight className="h-4 w-4 shrink-0 text-[#c36547]" />
           </button>
         </div>
 
         {location.state?.from && (
-          <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm leading-6 text-emerald-900">
+          <div className="rounded-lg border border-[#d3dfd1] bg-[#edf2e9] px-4 py-3 text-sm leading-6 text-[#385d49]">
             Sign in to continue to the page you requested.
           </div>
         )}
 
         {error && (
-          <div role="alert" aria-live="polite" className="flex items-center space-x-2 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm">
+          <div role="alert" aria-live="polite" className="flex items-center space-x-2 rounded-lg border border-rose-200 bg-rose-50 p-3.5 text-xs text-rose-700 sm:text-sm">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
           </div>
@@ -83,12 +82,12 @@ export const Login = () => {
 
         <form className="mt-7 space-y-5" onSubmit={handleSubmit}>
           <div>
-            <label className="mb-1.5 block text-sm font-semibold text-slate-800">
-              Email Address
+            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#52675b]">
+              Email address
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <Mail className="w-4 h-4" />
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#a59d8d]">
+                <Mail className="h-4 w-4" />
               </div>
               <input
                 type="email"
@@ -96,48 +95,49 @@ export const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-4 text-sm text-slate-900 transition focus:border-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-700/10"
+                className="w-full rounded-lg border border-[#ded9cc] bg-white/80 py-3.5 pl-11 pr-4 text-sm text-[#203a34] placeholder:text-[#b2ad9f] transition focus:border-[#c56647] focus:outline-none focus:ring-4 focus:ring-[#c56647]/10"
               />
             </div>
           </div>
 
           <div>
-            <div className="flex justify-between items-center mb-1.5">
-              <label className="block text-sm font-semibold text-slate-800">
+            <div className="mb-2 flex items-center justify-between">
+              <label className="block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#52675b]">
                 Password
               </label>
             </div>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <Lock className="w-4 h-4" />
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#a59d8d]">
+                <Lock className="h-4 w-4" />
               </div>
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-4 text-sm text-slate-900 transition focus:border-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-700/10"
+                placeholder="Your password"
+                className="w-full rounded-lg border border-[#ded9cc] bg-white/80 py-3.5 pl-11 pr-12 text-sm text-[#203a34] placeholder:text-[#b2ad9f] transition focus:border-[#c56647] focus:outline-none focus:ring-4 focus:ring-[#c56647]/10"
               />
+              <button type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? 'Hide password' : 'Show password'} className="absolute inset-y-0 right-0 flex items-center px-4 text-[#979487] transition hover:text-[#c36547]">{showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button>
             </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#214f3f] px-4 py-3.5 text-sm font-bold text-white transition hover:bg-[#173e31] focus:outline-none focus:ring-4 focus:ring-emerald-900/15 disabled:opacity-60"
+            className="group flex w-full items-center justify-between rounded-lg bg-[#c96143] px-5 py-3.5 text-sm font-bold text-white shadow-[0_9px_24px_rgba(190,86,59,.18)] transition hover:bg-[#b65337] focus:outline-none focus:ring-4 focus:ring-[#c96143]/20 disabled:opacity-60"
           >
-            <span>{loading ? 'Authenticating...' : 'Sign In'}</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>{loading ? 'Finding your way in…' : 'Sign in to TravelWise'}</span>
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-white/15 transition group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span>
           </button>
         </form>
 
-        <div className="border-t border-slate-100 pt-5 text-center text-sm text-slate-600">
-          Don't have an account?{' '}
+        <div className="mt-7 border-t border-[#e7e2d7] pt-5 text-center text-sm text-[#7b8178]">
+          New to TravelWise?{' '}
           <Link
             to="/register"
             state={{ from: location.state?.from }}
-            className="font-bold text-emerald-800 hover:text-emerald-950"
+            className="font-extrabold text-[#bd6043] hover:text-[#91462f]"
           >
             Create an account
           </Link>

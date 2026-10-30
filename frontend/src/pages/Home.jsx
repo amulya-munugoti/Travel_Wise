@@ -43,7 +43,7 @@ function RouteArtwork() {
   return (
     <div className="relative mx-auto aspect-[.94] w-full max-w-[510px] sm:aspect-[1.08]">
       <div className="absolute inset-3 rotate-[3deg] rounded-[2rem] bg-[#e5a35c] sm:inset-5" />
-      <div className="travel-map absolute inset-0 overflow-hidden rounded-[1.8rem] border border-white/20 bg-[#183d39] shadow-[0_32px_80px_rgba(16,39,35,.28)] sm:rounded-[2rem]">
+      <div className="travel-map animate-map-float absolute inset-0 overflow-hidden rounded-[1.8rem] border border-white/20 bg-[#183d39] shadow-[0_32px_80px_rgba(16,39,35,.28)] sm:rounded-[2rem]">
         <div className="absolute inset-0 opacity-80" style={{ background: 'radial-gradient(ellipse at 25% 28%, #43796a 0, transparent 31%), radial-gradient(ellipse at 76% 78%, #284f49 0, transparent 36%), linear-gradient(135deg,#173b37,#244d46 58%,#173732)' }} />
         <div className="absolute -left-10 top-10 h-48 w-48 rounded-full border border-white/[.08]" />
         <div className="absolute -left-4 top-16 h-36 w-36 rounded-full border border-white/[.08]" />
@@ -55,7 +55,7 @@ function RouteArtwork() {
         </div>
         <div className="absolute right-7 top-8 rotate-12 font-serif text-xs text-[#d9a25f]">N</div>
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 500 520" fill="none" aria-hidden="true">
-          <path d="M112 398C143 355 152 318 198 303C241 289 280 318 306 268C331 220 296 181 344 146C365 130 389 126 408 103" stroke="#E8B779" strokeWidth="2.5" strokeDasharray="4 9" strokeLinecap="round" />
+          <path className="route-line" d="M112 398C143 355 152 318 198 303C241 289 280 318 306 268C331 220 296 181 344 146C365 130 389 126 408 103" stroke="#E8B779" strokeWidth="2.5" strokeDasharray="4 9" strokeLinecap="round" />
           <path d="M76 406C132 376 171 397 207 371C243 346 246 332 286 339" stroke="#FFFFFF" strokeOpacity=".12" strokeWidth="1" />
           <path d="M153 128C181 153 190 176 215 187C241 198 254 193 272 215" stroke="#FFFFFF" strokeOpacity=".12" strokeWidth="1" />
           <circle cx="112" cy="398" r="8" fill="#E8B779" stroke="#F7E6C7" strokeWidth="3" />
@@ -65,7 +65,7 @@ function RouteArtwork() {
         <span className="absolute left-[12%] top-[76%] text-[9px] font-semibold uppercase tracking-[.2em] text-white/55">Start anywhere</span>
         <span className="absolute right-[10%] top-[18%] text-[9px] font-semibold uppercase tracking-[.2em] text-white/55">Find your own way</span>
 
-        <div className="absolute bottom-5 left-5 right-5 rounded-[1.35rem] border border-white/60 bg-[#f8f3e8] p-4 text-[#203a34] shadow-[0_16px_45px_rgba(8,25,22,.25)] sm:bottom-7 sm:left-7 sm:right-7 sm:p-5">
+        <div className="animate-note-float absolute bottom-5 left-5 right-5 rounded-[1.35rem] border border-white/60 bg-[#f8f3e8] p-4 text-[#203a34] shadow-[0_16px_45px_rgba(8,25,22,.25)] sm:bottom-7 sm:left-7 sm:right-7 sm:p-5">
           <div className="flex items-start justify-between gap-2">
             <div>
               <p className="text-[9px] font-extrabold uppercase tracking-[.2em] text-[#c76143]">A field note · No. 014</p>
@@ -90,17 +90,17 @@ function RouteArtwork() {
 function WelcomeHome() {
   return (
     <div className="overflow-hidden bg-[#f4f0e7] text-[#203a34]">
-      <section className="relative mx-auto grid min-h-[650px] max-w-[1440px] items-center gap-10 px-5 py-14 sm:px-10 sm:py-16 lg:min-h-[690px] lg:grid-cols-[1fr_.94fr] lg:gap-4 lg:px-16 lg:py-12 xl:px-24">
+      <section className="home-hero relative mx-auto grid min-h-[650px] max-w-[1440px] items-center gap-10 px-5 py-14 sm:px-10 sm:py-16 lg:min-h-[690px] lg:grid-cols-[1fr_.94fr] lg:gap-4 lg:px-16 lg:py-12 xl:px-24">
         <div className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-[#e4e5d5]/60 blur-3xl" />
         <div className="relative z-10 max-w-[620px] pb-4 lg:pb-14">
-          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#d8d7c9] bg-[#faf8f1] px-3.5 py-2 text-[10px] font-extrabold uppercase tracking-[.17em] text-[#526c5c]">
+          <div className="motion-rise mb-7 inline-flex items-center gap-2 rounded-full border border-[#d8d7c9] bg-[#faf8f1] px-3.5 py-2 text-[10px] font-extrabold uppercase tracking-[.17em] text-[#526c5c]">
             <Sparkles className="h-3.5 w-3.5 text-[#c96143]" /> Made for your next little escape
           </div>
-          <h1 className="font-heading text-[3.45rem] font-medium leading-[.96] tracking-[-.075em] text-[#193b35] sm:text-7xl lg:text-[5.7rem]">
+          <h1 className="motion-rise font-heading text-[3.45rem] font-medium leading-[.96] tracking-[-.075em] text-[#193b35] sm:text-7xl lg:text-[5.7rem]" style={{ animationDelay: '100ms' }}>
             Go where<br />the day <span className="relative inline-block font-serif font-normal italic text-[#ce6545]">takes you<span className="absolute -bottom-1 left-0 right-0 -rotate-2 border-b-2 border-[#d9a46c]" /></span>.
           </h1>
-          <p className="mt-7 max-w-[440px] text-[15px] leading-7 text-[#64736b] sm:text-base sm:leading-8">A few free days can take you a long way. Find places with a little character, then shape a trip that feels like yours.</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <p className="motion-rise mt-7 max-w-[440px] text-[15px] leading-7 text-[#64736b] sm:text-base sm:leading-8" style={{ animationDelay: '180ms' }}>A few free days can take you a long way. Find places with a little character, then shape a trip that feels like yours.</p>
+          <div className="motion-rise mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ animationDelay: '260ms' }}>
             <Link to="/register" className="group inline-flex min-h-[54px] items-center justify-center gap-3 rounded-full bg-[#cf6546] px-6 text-sm font-bold text-white shadow-[0_10px_24px_rgba(190,86,59,.2)] transition hover:-translate-y-0.5 hover:bg-[#b95337]">
               Plan your first getaway <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>

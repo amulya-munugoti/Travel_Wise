@@ -65,23 +65,23 @@ export const Register = () => {
   };
 
   return (
-    <AuthLayout>
+    <AuthLayout mode="register">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[.16em] text-[#628167]">Your next trip starts here</p>
-          <h1 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-[#1d3529]">Create your account</h1>
-          <p className="mt-2 text-sm leading-6 text-slate-600">
+          <p className="text-[10px] font-extrabold uppercase tracking-[.2em] text-[#bd6043]">Start with a daydream</p>
+          <h1 className="mt-3 font-heading text-4xl font-medium tracking-[-.055em] text-[#203a34]">Make it yours.</h1>
+          <p className="mt-2 text-sm leading-6 text-[#778078]">
             Save your plans, preferences and the places you want to see.
           </p>
         </div>
 
         {location.state?.from && (
-          <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm leading-6 text-emerald-900">
+          <div className="rounded-lg border border-[#d3dfd1] bg-[#edf2e9] px-4 py-3 text-sm leading-6 text-[#385d49]">
             Create an account to continue to the page you requested.
           </div>
         )}
 
         {error && (
-          <div role="alert" aria-live="polite" className="flex items-center space-x-2 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm">
+          <div role="alert" aria-live="polite" className="flex items-center space-x-2 rounded-lg border border-rose-200 bg-rose-50 p-3.5 text-xs text-rose-700 sm:text-sm">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
           </div>
@@ -89,11 +89,11 @@ export const Register = () => {
 
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="mb-1.5 block text-sm font-semibold text-slate-800">
+            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#52675b]">
               Full Name
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#a59d8d]">
                 <User className="w-4 h-4" />
               </div>
               <input
@@ -102,17 +102,17 @@ export const Register = () => {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Amulya Rao"
-                className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-4 text-sm text-slate-900 transition focus:border-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-700/10"
+                className="w-full rounded-lg border border-[#ded9cc] bg-white/80 py-3.5 pl-11 pr-4 text-sm text-[#203a34] placeholder:text-[#b2ad9f] transition focus:border-[#c56647] focus:outline-none focus:ring-4 focus:ring-[#c56647]/10"
               />
             </div>
           </div>
 
           <div>
-            <label className="mb-1.5 block text-sm font-semibold text-slate-800">
+            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#52675b]">
               Email Address
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#a59d8d]">
                 <Mail className="w-4 h-4" />
               </div>
               <input
@@ -121,17 +121,17 @@ export const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="amulya@example.com"
-                className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-4 text-sm text-slate-900 transition focus:border-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-700/10"
+                className="w-full rounded-lg border border-[#ded9cc] bg-white/80 py-3.5 pl-11 pr-4 text-sm text-[#203a34] placeholder:text-[#b2ad9f] transition focus:border-[#c56647] focus:outline-none focus:ring-4 focus:ring-[#c56647]/10"
               />
             </div>
           </div>
 
           <div>
-            <label className="mb-1.5 block text-sm font-semibold text-slate-800">
+            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#52675b]">
               Password (min. 6 characters)
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#a59d8d]">
                 <Lock className="w-4 h-4" />
               </div>
               <input
@@ -140,19 +140,19 @@ export const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-4 text-sm text-slate-900 transition focus:border-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-700/10"
+                className="w-full rounded-lg border border-[#ded9cc] bg-white/80 py-3.5 pl-11 pr-4 text-sm text-[#203a34] placeholder:text-[#b2ad9f] transition focus:border-[#c56647] focus:outline-none focus:ring-4 focus:ring-[#c56647]/10"
               />
             </div>
           </div>
 
           <div>
-            <label className="mb-1.5 block text-sm font-semibold text-slate-800">
+            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#52675b]">
               Home City (for nearby trip recommendations)
             </label>
             <select
               value={homeCity}
               onChange={(e) => setHomeCity(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-3 text-sm text-slate-900 transition focus:border-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-700/10"
+              className="w-full rounded-lg border border-[#ded9cc] bg-white/80 px-3.5 py-3.5 text-sm text-[#203a34] transition focus:border-[#c56647] focus:outline-none focus:ring-4 focus:ring-[#c56647]/10"
             >
               <option value="Hyderabad">Hyderabad</option>
               <option value="Bengaluru">Bengaluru</option>
@@ -168,19 +168,19 @@ export const Register = () => {
           <button
             type="submit"
             disabled={loading}
-            className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#214f3f] px-4 py-3.5 text-sm font-bold text-white transition hover:bg-[#173e31] focus:outline-none focus:ring-4 focus:ring-emerald-900/15 disabled:opacity-60"
+            className="group mt-2 flex w-full items-center justify-between rounded-lg bg-[#c96143] px-5 py-3.5 text-sm font-bold text-white shadow-[0_9px_24px_rgba(190,86,59,.18)] transition hover:bg-[#b65337] focus:outline-none focus:ring-4 focus:ring-[#c96143]/20 disabled:opacity-60"
           >
-            <span>{loading ? 'Creating account...' : 'Create Account'}</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>{loading ? 'Getting things ready…' : 'Create your account'}</span>
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-white/15 transition group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span>
           </button>
         </form>
 
-        <div className="border-t border-slate-100 pt-5 text-center text-sm text-slate-600">
+        <div className="border-t border-[#e7e2d7] pt-5 text-center text-sm text-[#7b8178]">
           Already have an account?{' '}
           <Link
             to="/login"
             state={{ from: location.state?.from }}
-            className="font-bold text-emerald-800 hover:text-emerald-950"
+            className="font-extrabold text-[#bd6043] hover:text-[#91462f]"
           >
             Sign In
           </Link>
