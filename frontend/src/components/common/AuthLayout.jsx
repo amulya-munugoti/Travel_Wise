@@ -1,40 +1,45 @@
 import React from 'react';
 import { ArrowUpRight, Compass, MapPin, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function AuthLayout({ children, mode = 'login' }) {
   const isRegister = mode === 'register';
 
   return (
-    <div className="auth-scene relative min-h-[calc(100vh-68px)] overflow-hidden bg-[#f2eee4] p-0 sm:px-5 sm:py-5 lg:px-8">
-      <div className="auth-shell mx-auto grid min-h-[calc(100vh-68px)] max-w-[1500px] overflow-hidden bg-[#fbf9f3] shadow-[0_32px_100px_rgba(23,48,43,.15)] sm:min-h-[min(800px,calc(100vh-108px))] lg:grid-cols-[1.05fr_.95fr]">
-        <aside className="auth-poster relative min-h-[260px] overflow-hidden bg-[#193b38] text-white sm:min-h-[340px] lg:min-h-[min(800px,calc(100vh-108px))]">
-          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=90" alt="Sunlight crossing a mountain range" className="auth-photo absolute inset-0 h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,34,30,.38)_0%,rgba(15,34,29,.12)_36%,rgba(13,30,27,.82)_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(18,40,34,.35),transparent)]" />
-          <div className="relative flex h-full min-h-[260px] flex-col justify-between p-5 sm:min-h-[340px] sm:p-8 lg:min-h-[min(800px,calc(100vh-108px))] lg:p-12 xl:p-14">
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-full border border-white/25 bg-white/10 text-[#f1c28c] backdrop-blur"><Compass className="h-5 w-5" /></span><span className="text-sm font-extrabold tracking-[.02em]">TravelWise</span></div>
-              <span className="hidden text-[9px] font-bold uppercase tracking-[.23em] text-white/65 sm:block">A field guide for going</span>
-            </div>
-            <div className="poster-copy relative z-10 mt-12 max-w-[570px] lg:mt-20">
-              <p className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.22em] text-[#f3c68f]"><Sparkles className="h-3.5 w-3.5" /> {isRegister ? 'Start with a daydream' : 'Your trip is right where you left it'}</p>
-              <h2 className="mt-5 font-heading text-[2.6rem] font-medium leading-[.93] tracking-[-.065em] sm:text-6xl xl:text-[5rem]">{isRegister ? <>Somewhere<br />new is <span className="font-serif font-normal italic text-[#f3c68f]">calling.</span></> : <>The good days<br />are <span className="font-serif font-normal italic text-[#f3c68f]">up ahead.</span></>}</h2>
-              <p className="mt-5 max-w-[340px] text-sm leading-7 text-white/75">{isRegister ? 'Keep the places you love. Find a few you didn’t know to look for.' : 'Your saved places, little plans, and next escape are waiting.'}</p>
-            </div>
-            <div className="relative mt-9 flex items-end justify-between gap-4 lg:mt-12">
-              <div className="flex items-center gap-3 text-white"><span className="grid h-9 w-9 place-items-center rounded-full bg-[#f1c58d] text-[#25453d]"><MapPin className="h-4 w-4" /></span><div><p className="text-[10px] font-bold uppercase tracking-[.16em]">The Western Ghats</p><p className="mt-1 text-[10px] text-white/70">12° 21' N · a slower way through</p></div></div>
-              <div className="poster-stamp hidden h-[72px] w-[72px] rotate-[-12deg] items-center justify-center rounded-full border border-dashed border-white/75 text-center font-serif text-[10px] italic leading-4 text-white sm:flex">TAKE<br />THE LONG<br />WAY HOME</div>
-            </div>
-          </div>
-          <span className="auth-floating-note absolute right-8 top-[44%] hidden rounded-xl border border-white/25 bg-[#183931]/40 px-4 py-3 text-[10px] text-white shadow-xl backdrop-blur-md sm:block"><span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[#efbe7e]" /> Three days. Plenty of stories.</span>
-        </aside>
+    <div className="auth-scene flex min-h-screen items-center bg-[#d9ef68] p-0 sm:p-4 lg:p-6">
+      <div className="auth-board relative mx-auto min-h-screen w-full max-w-[1500px] overflow-hidden bg-[#413ce9] text-white shadow-[0_30px_90px_rgba(34,39,129,.24)] sm:min-h-[min(850px,calc(100vh-32px))]">
+        <div className="auth-sun absolute -right-24 -top-40 h-[520px] w-[520px] rounded-full bg-[#6660ff]" />
+        <div className="auth-lines absolute inset-0 opacity-30" />
+        <header className="relative z-20 flex items-center justify-between px-5 py-5 sm:px-8 sm:py-7 lg:px-12">
+          <Link to="/" className="flex items-center gap-2.5 text-white"><span className="grid h-9 w-9 place-items-center rounded-full bg-[#dcf264] text-[#25257f]"><Compass className="h-[18px] w-[18px]" /></span><span className="text-sm font-extrabold tracking-[.02em]">TravelWise</span></Link>
+          <Link to="/" className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-[.16em] text-white/75 transition hover:text-[#e2f671]">Back to explore <ArrowUpRight className="h-3.5 w-3.5" /></Link>
+        </header>
 
-        <main className="relative flex items-center justify-center px-5 py-10 sm:px-10 sm:py-12 lg:px-12 xl:px-[5.5rem]">
-          <ArrowUpRight className="absolute right-8 top-8 hidden h-5 w-5 text-[#c9c4b6] lg:block" />
-          <div className="auth-form w-full max-w-[420px]">{children}</div>
+        <div className="auth-cover relative mx-4 h-[230px] overflow-hidden rounded-[1.4rem] sm:mx-8 sm:h-[290px] lg:absolute lg:bottom-0 lg:right-0 lg:top-0 lg:mx-0 lg:h-auto lg:w-[68%] lg:rounded-none">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=90" alt="A mountain ridge above the clouds" className="auth-photo absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#2e31b6]/25 via-transparent to-[#11104c]/55" />
+          <div className="absolute inset-0 bg-[#413ce9]/10 mix-blend-color" />
+          <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-8 lg:p-12">
+            <div className="flex items-center gap-2 text-[9px] font-extrabold uppercase tracking-[.22em] text-[#f2ffb6]"><Sparkles className="h-3.5 w-3.5" /> {isRegister ? 'The first page of your next story' : 'Your saved places are waiting'}</div>
+            <div className="relative z-10">
+              <h2 className="max-w-[640px] font-serif text-4xl font-medium leading-[.9] tracking-[-.055em] text-white sm:text-6xl lg:text-[5.3rem]">{isRegister ? <>Somewhere<br /><i className="font-normal text-[#e0f36d]">new is calling.</i></> : <>There’s a world<br /><i className="font-normal text-[#e0f36d]">out there.</i></>}</h2>
+              <p className="mt-4 hidden max-w-xs text-sm leading-6 text-white/80 sm:block">{isRegister ? 'Make room for the detours, the long lunches and the stories.' : 'Pick up your plans and take the next little escape from here.'}</p>
+            </div>
+            <div className="hidden items-center justify-between lg:flex"><span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-[#17145e]/30 px-3 py-2 text-[9px] font-bold uppercase tracking-[.13em] text-white backdrop-blur-md"><MapPin className="h-3.5 w-3.5 text-[#e0f36d]" /> Western Ghats · 12° 21' N</span><span className="font-serif text-[10px] italic text-white/75">TAKE THE LONG WAY HOME</span></div>
+          </div>
+          <div className="auth-orbit absolute -right-20 top-[-55px] hidden h-[370px] w-[370px] rounded-full border border-white/45 lg:block"><span className="absolute left-[8%] top-[48%] grid h-10 w-10 place-items-center rounded-full bg-[#e0f36d] text-[#292886] shadow-[0_0_35px_rgba(224,243,109,.6)]"><Compass className="h-5 w-5" /></span></div>
+        </div>
+
+        <main className="auth-pass relative z-10 mx-4 mb-8 mt-[-18px] border border-[#252983]/15 bg-[#fbf8ec] px-5 py-6 text-[#22264d] shadow-[0_24px_65px_rgba(22,18,88,.22)] sm:mx-8 sm:px-8 sm:py-8 lg:absolute lg:left-[6%] lg:top-1/2 lg:mx-0 lg:mb-0 lg:mt-0 lg:w-[470px] lg:-translate-y-[43%] lg:px-10 lg:py-10 xl:left-[8%]">
+          <div className="auth-ticket-edge pointer-events-none absolute inset-x-0 top-0 h-2" />
+          <div className="mb-6 flex items-center justify-between border-b border-dashed border-[#c9c6b6] pb-3"><span className="text-[9px] font-extrabold uppercase tracking-[.2em] text-[#4a46d8]">{isRegister ? 'Your travel pass · 01' : 'Your travel pass · Welcome back'}</span><span className="font-mono text-[9px] text-[#999787]">TW / 2026</span></div>
+          {children}
+          <span className="absolute -bottom-3 right-8 h-6 w-6 rounded-full border border-[#252983]/10 bg-[#413ce9]" />
+          <span className="absolute -bottom-3 left-8 h-6 w-6 rounded-full border border-[#252983]/10 bg-[#413ce9]" />
         </main>
+
+        <div className="pointer-events-none absolute bottom-6 left-[8%] hidden text-[9px] font-extrabold uppercase tracking-[.22em] text-white/55 lg:block">Plan less · Be there more</div>
       </div>
-      <p className="mx-auto mt-4 hidden max-w-[1500px] items-center justify-between px-2 text-[9px] font-bold uppercase tracking-[.2em] text-[#928f82] sm:flex"><span>Plan less. Be there more.</span><span>TRAVELWISE · 2026</span></p>
     </div>
   );
 }

@@ -109,6 +109,16 @@
 .orbit-globe { animation: globe-beat 3.5s ease-in-out infinite; }
 .journey-orbit { animation: float-up 1.2s .35s cubic-bezier(.2,.7,.2,1) both; }
 .itinerary-pop { animation: card-rock 4.1s .35s ease-in-out infinite; }
+.travel-home, .auth-scene { font-family: 'DM Sans', 'Plus Jakarta Sans', sans-serif; }
+.travel-home .font-heading, .auth-pass h1, .auth-pass h2, .auth-pass h3 { font-family: 'Fraunces', Georgia, serif !important; }
+.auth-board { isolation: isolate; }
+.auth-sun { animation: slow-float 9s ease-in-out infinite; }
+.auth-lines { background-image: radial-gradient(rgba(255,255,255,.18) .8px,transparent .8px); background-size: 15px 15px; mask-image: linear-gradient(135deg,black,transparent 62%); }
+.auth-cover { isolation: isolate; }
+.auth-pass { animation: card-enter .9s .22s cubic-bezier(.2,.7,.2,1) both; }
+.auth-ticket-edge { background: repeating-linear-gradient(90deg,#e2f477 0 18px,transparent 18px 29px); }
+@media (min-width: 1024px) { .auth-cover { clip-path: ellipse(95% 94% at 75% 50%); } }
+.auth-orbit { animation: orbit-spin 34s linear infinite; }
 
 .motion-rise { animation: rise-in .72s cubic-bezier(.2,.7,.2,1) both; }
 .animate-map-float { animation: map-drift 8s ease-in-out infinite; }
@@ -125,7 +135,7 @@
 @media (prefers-reduced-motion: reduce) {
   .motion-rise, .animate-map-float, .animate-note-float, .route-line, .auth-route, .auth-form, .poster-copy, .poster-stamp, .poster-glow::after,
   .hero-photo, .hero-copy, .hero-trip-card, .marquee-track, .section-reveal, .destination-card, .trip-day-row, .auth-photo, .auth-floating-note,
-  .orbit-ring-one, .orbit-ring-two, .orbit-plane, .orbit-globe, .journey-orbit, .itinerary-pop { animation: none !important; }
+  .orbit-ring-one, .orbit-ring-two, .orbit-plane, .orbit-globe, .journey-orbit, .itinerary-pop, .auth-sun, .auth-pass, .auth-orbit { animation: none !important; }
   .scroll-reveal, .scroll-reveal .destination-card { opacity: 1 !important; transform: none !important; filter: none !important; }
 }
 

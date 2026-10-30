@@ -67,9 +67,9 @@ export const Register = () => {
   return (
     <AuthLayout mode="register">
         <div>
-          <p className="text-[10px] font-extrabold uppercase tracking-[.2em] text-[#bd6043]">Start with a daydream</p>
-          <h1 className="mt-3 font-heading text-4xl font-medium tracking-[-.055em] text-[#203a34]">Make it yours.</h1>
-          <p className="mt-2 text-sm leading-6 text-[#778078]">
+          <p className="text-[10px] font-extrabold uppercase tracking-[.2em] text-[#4842db]">Start with a daydream</p>
+          <h1 className="mt-3 font-serif text-4xl font-medium tracking-[-.055em] text-[#242354]">Make it yours.</h1>
+          <p className="mt-2 text-sm leading-6 text-[#77768c]">
             Save your plans, preferences and the places you want to see.
           </p>
         </div>
@@ -89,11 +89,11 @@ export const Register = () => {
 
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#52675b]">
+            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#57568a]">
               Full Name
             </label>
             <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#a59d8d]">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#9796a8]">
                 <User className="w-4 h-4" />
               </div>
               <input
@@ -102,17 +102,17 @@ export const Register = () => {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Amulya Rao"
-                className="w-full rounded-lg border border-[#ded9cc] bg-white/80 py-3.5 pl-11 pr-4 text-sm text-[#203a34] placeholder:text-[#b2ad9f] transition focus:border-[#c56647] focus:outline-none focus:ring-4 focus:ring-[#c56647]/10"
+                className="w-full rounded-lg border border-[#d4d2e4] bg-white/90 py-3.5 pl-11 pr-4 text-sm text-[#242354] placeholder:text-[#a4a2b6] transition focus:border-[#4842db] focus:outline-none focus:ring-4 focus:ring-[#4842db]/15"
               />
             </div>
           </div>
 
           <div>
-            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#52675b]">
+            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#57568a]">
               Email Address
             </label>
             <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#a59d8d]">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#9796a8]">
                 <Mail className="w-4 h-4" />
               </div>
               <input
@@ -121,17 +121,17 @@ export const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="amulya@example.com"
-                className="w-full rounded-lg border border-[#ded9cc] bg-white/80 py-3.5 pl-11 pr-4 text-sm text-[#203a34] placeholder:text-[#b2ad9f] transition focus:border-[#c56647] focus:outline-none focus:ring-4 focus:ring-[#c56647]/10"
+                className="w-full rounded-lg border border-[#d4d2e4] bg-white/90 py-3.5 pl-11 pr-4 text-sm text-[#242354] placeholder:text-[#a4a2b6] transition focus:border-[#4842db] focus:outline-none focus:ring-4 focus:ring-[#4842db]/15"
               />
             </div>
           </div>
 
           <div>
-            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#52675b]">
+            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#57568a]">
               Password (min. 6 characters)
             </label>
             <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#a59d8d]">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#9796a8]">
                 <Lock className="w-4 h-4" />
               </div>
               <input
@@ -140,19 +140,19 @@ export const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="w-full rounded-lg border border-[#ded9cc] bg-white/80 py-3.5 pl-11 pr-4 text-sm text-[#203a34] placeholder:text-[#b2ad9f] transition focus:border-[#c56647] focus:outline-none focus:ring-4 focus:ring-[#c56647]/10"
+                className="w-full rounded-lg border border-[#d4d2e4] bg-white/90 py-3.5 pl-11 pr-4 text-sm text-[#242354] placeholder:text-[#a4a2b6] transition focus:border-[#4842db] focus:outline-none focus:ring-4 focus:ring-[#4842db]/15"
               />
             </div>
           </div>
 
           <div>
-            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#52675b]">
+            <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-[.12em] text-[#57568a]">
               Home City (for nearby trip recommendations)
             </label>
             <select
               value={homeCity}
               onChange={(e) => setHomeCity(e.target.value)}
-              className="w-full rounded-lg border border-[#ded9cc] bg-white/80 px-3.5 py-3.5 text-sm text-[#203a34] transition focus:border-[#c56647] focus:outline-none focus:ring-4 focus:ring-[#c56647]/10"
+              className="w-full rounded-lg border border-[#d4d2e4] bg-white/90 px-3.5 py-3.5 text-sm text-[#242354] transition focus:border-[#4842db] focus:outline-none focus:ring-4 focus:ring-[#4842db]/15"
             >
               <option value="Hyderabad">Hyderabad</option>
               <option value="Bengaluru">Bengaluru</option>
@@ -168,7 +168,7 @@ export const Register = () => {
           <button
             type="submit"
             disabled={loading}
-            className="group mt-2 flex w-full items-center justify-between rounded-lg bg-[#c96143] px-5 py-3.5 text-sm font-bold text-white shadow-[0_9px_24px_rgba(190,86,59,.18)] transition hover:bg-[#b65337] focus:outline-none focus:ring-4 focus:ring-[#c96143]/20 disabled:opacity-60"
+            className="group mt-2 flex w-full items-center justify-between rounded-lg bg-[#4842db] px-5 py-3.5 text-sm font-bold text-white shadow-[0_9px_24px_rgba(72,66,219,.22)] transition hover:bg-[#302bb3] focus:outline-none focus:ring-4 focus:ring-[#4842db]/20 disabled:opacity-60"
           >
             <span>{loading ? 'Getting things ready…' : 'Create your account'}</span>
             <span className="grid h-8 w-8 place-items-center rounded-full bg-white/15 transition group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span>
@@ -180,7 +180,7 @@ export const Register = () => {
           <Link
             to="/login"
             state={{ from: location.state?.from }}
-            className="font-extrabold text-[#bd6043] hover:text-[#91462f]"
+            className="font-extrabold text-[#4842db] hover:text-[#302bb3]"
           >
             Sign In
           </Link>

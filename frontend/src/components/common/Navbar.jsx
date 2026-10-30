@@ -33,15 +33,17 @@ export default function Navbar() {
     navigate('/');
   };
 
+  if (isAuthPage) return null;
+
   return (
     <header className="sticky top-0 z-40 border-b border-[#dedbce] bg-[#f8f5ed]/95 backdrop-blur-xl">
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/" onClick={closeMenus} className="flex items-center gap-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#cf6546] text-white shadow-sm shadow-[#cf6546]/20">
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#4842db] text-white shadow-sm shadow-[#4842db]/20">
             <Compass className="h-[18px] w-[18px]" />
           </span>
-          <span className="text-[17px] font-extrabold tracking-[-.035em] text-[#203a34]">
-            Travel<span className="text-[#c26345]">Wise</span>
+          <span className="text-[17px] font-extrabold tracking-[-.035em] text-[#242354]">
+            Travel<span className="text-[#4842db]">Wise</span>
           </span>
         </Link>
 
@@ -53,7 +55,7 @@ export default function Navbar() {
                 key={to}
                 to={to}
                 className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold transition ${
-                  active ? 'bg-[#e8e5d9] text-[#31584c]' : 'text-[#68746b] hover:bg-[#eeece3] hover:text-[#253b34]'
+                  active ? 'bg-[#e8e6ff] text-[#39369a]' : 'text-[#687080] hover:bg-[#eeedfa] hover:text-[#25244c]'
                 }`}
               >
                 {Icon && <Icon className="h-4 w-4" />}
@@ -89,8 +91,8 @@ export default function Navbar() {
             </div>
           ) : (
             <>
-              <Link to="/login" className="text-[13px] font-semibold text-[#68746b] transition hover:text-[#203a34]">Sign in</Link>
-              <Link to="/register" className="rounded-full bg-[#cf6546] px-4 py-2.5 text-[13px] font-bold text-white transition hover:bg-[#b95337]">Create account</Link>
+              <Link to="/login" className="text-[13px] font-semibold text-[#687080] transition hover:text-[#25244c]">Sign in</Link>
+              <Link to="/register" className="rounded-full bg-[#4842db] px-4 py-2.5 text-[13px] font-bold text-white transition hover:bg-[#302bb3]">Create account</Link>
             </>
           )}
         </div>}
