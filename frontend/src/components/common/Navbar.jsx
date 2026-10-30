@@ -34,14 +34,14 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#e6e9e0] bg-[#fbfaf7]/95 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-[#dedbce] bg-[#f8f5ed]/95 backdrop-blur-xl">
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/" onClick={closeMenus} className="flex items-center gap-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#24513d] text-white shadow-sm shadow-[#24513d]/20">
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#cf6546] text-white shadow-sm shadow-[#cf6546]/20">
             <Compass className="h-[18px] w-[18px]" />
           </span>
-          <span className="text-[17px] font-extrabold tracking-[-.035em] text-[#203b2b]">
-            Travel<span className="text-[#658366]">Wise</span>
+          <span className="text-[17px] font-extrabold tracking-[-.035em] text-[#203a34]">
+            Travel<span className="text-[#c26345]">Wise</span>
           </span>
         </Link>
 
@@ -53,7 +53,7 @@ export default function Navbar() {
                 key={to}
                 to={to}
                 className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold transition ${
-                  active ? 'bg-[#eaf0e6] text-[#315c40]' : 'text-[#68746b] hover:bg-[#f0f1eb] hover:text-[#253b2b]'
+                  active ? 'bg-[#e8e5d9] text-[#31584c]' : 'text-[#68746b] hover:bg-[#eeece3] hover:text-[#253b34]'
                 }`}
               >
                 {Icon && <Icon className="h-4 w-4" />}
@@ -89,8 +89,8 @@ export default function Navbar() {
             </div>
           ) : (
             <>
-              <Link to="/login" className="text-[13px] font-semibold text-[#68746b] transition hover:text-[#203b2b]">Sign in</Link>
-              <Link to="/register" className="rounded-full border border-[#dce3d8] bg-white px-4 py-2.5 text-[13px] font-bold text-[#315c40] transition hover:border-[#c2d0c0] hover:bg-[#f7f8f4]">Create account</Link>
+              <Link to="/login" className="text-[13px] font-semibold text-[#68746b] transition hover:text-[#203a34]">Sign in</Link>
+              <Link to="/register" className="rounded-full bg-[#cf6546] px-4 py-2.5 text-[13px] font-bold text-white transition hover:bg-[#b95337]">Create account</Link>
             </>
           )}
         </div>}
